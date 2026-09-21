@@ -91,12 +91,18 @@ function checkUrlGuestParameters() {
 // Load config.json with fallback to localStorage draft
 async function loadConfiguration() {
   try {
+    const response = await fetch('./config.json');
+    const masterConfig = await response.json();
+    
     const localDraft = localStorage.getItem('wedding_config_draft');
     if (localDraft) {
       appConfig = JSON.parse(localDraft);
+      // Always sync audioUrl and music title with master config if set to local assets
+      if (masterConfig.musica) {
+        appConfig.musica = masterConfig.musica;
+      }
     } else {
-      const response = await fetch('./config.json');
-      appConfig = await response.json();
+      appConfig = masterConfig;
     }
   } catch (error) {
     console.error('Error cargando config.json:', error);
