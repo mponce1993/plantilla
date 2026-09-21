@@ -271,22 +271,22 @@ function setupAudioPlayer() {
   const iconPause = document.getElementById('icon-pause');
   const equalizer = document.getElementById('equalizer');
 
-  if (appConfig?.musica?.audioUrl) {
+  if (appConfig?.musica?.audioUrl && audio) {
     audio.src = appConfig.musica.audioUrl;
   }
 
-  btnPlay.addEventListener('click', () => {
+  btnPlay?.addEventListener('click', () => {
     if (audio.paused) {
       audio.play().then(() => {
-        iconPlay.classList.add('hidden');
-        iconPause.classList.remove('hidden');
-        equalizer.classList.remove('hidden');
-      }).catch(err => console.log('Audio autoplay prevented:', err));
+        iconPlay?.classList.add('hidden');
+        iconPause?.classList.remove('hidden');
+        equalizer?.classList.remove('hidden');
+      }).catch(err => console.log('Audio autoplay blocked by browser:', err));
     } else {
       audio.pause();
-      iconPlay.classList.remove('hidden');
-      iconPause.classList.add('hidden');
-      equalizer.classList.add('hidden');
+      iconPlay?.classList.remove('hidden');
+      iconPause?.classList.add('hidden');
+      equalizer?.classList.add('hidden');
     }
   });
 }

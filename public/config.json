@@ -15,7 +15,7 @@
   },
   "musica": {
     "titulo": "Nuestra Canción Romántica",
-    "audioUrl": "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-waltz-113426.mp3"
+    "audioUrl": "./assets/corazon_encantado.mp3"
   },
   "historia": {
     "titulo": "Nuestra Historia",
@@ -37,11 +37,31 @@
     "mapaUrl": "https://maps.google.com/?q=MOVA+Eventos+CDMX"
   },
   "itinerario": [
-    { "hora": "05:00 pm", "titulo": "Ceremonia Religiosa", "icon": "church" },
-    { "hora": "07:00 pm", "titulo": "Recepción", "icon": "rings" },
-    { "hora": "08:00 pm", "titulo": "Vals de Novios", "icon": "dance" },
-    { "hora": "08:30 pm", "titulo": "Cena", "icon": "dinner" },
-    { "hora": "09:30 pm", "titulo": "Fiesta", "icon": "party" }
+    {
+      "hora": "05:00 pm",
+      "titulo": "Ceremonia Religiosa",
+      "icon": "church"
+    },
+    {
+      "hora": "07:00 pm",
+      "titulo": "Recepción",
+      "icon": "rings"
+    },
+    {
+      "hora": "08:00 pm",
+      "titulo": "Vals de Novios",
+      "icon": "dance"
+    },
+    {
+      "hora": "08:30 pm",
+      "titulo": "Cena",
+      "icon": "dinner"
+    },
+    {
+      "hora": "09:30 pm",
+      "titulo": "Fiesta",
+      "icon": "party"
+    }
   ],
   "notaNinos": "Amamos a los niños, pero creemos que esta noche se merecen disfrutar solos como pareja, por eso en esta ocasión será solo para adultos.",
   "dressCode": {
@@ -58,15 +78,27 @@
       {
         "titular": "Bruno Mendez Huari",
         "detalles": [
-          { "etiqueta": "BBVA", "valor": "1111 1111 0123456789" },
-          { "etiqueta": "PLIN", "valor": "000 333 777" }
+          {
+            "etiqueta": "BBVA",
+            "valor": "1111 1111 0123456789"
+          },
+          {
+            "etiqueta": "PLIN",
+            "valor": "000 333 777"
+          }
         ]
       },
       {
         "titular": "Andrea Olivera Alves",
         "detalles": [
-          { "etiqueta": "BCP", "valor": "0000 XXXXX 22222" },
-          { "etiqueta": "YAPE", "valor": "000 555 777" }
+          {
+            "etiqueta": "BCP",
+            "valor": "0000 XXXXX 22222"
+          },
+          {
+            "etiqueta": "YAPE",
+            "valor": "000 555 777"
+          }
         ]
       }
     ]
