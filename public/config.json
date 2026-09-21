@@ -1,0 +1,82 @@
+{
+  "novio": "Bruno Olivera",
+  "novia": "Andrea Mendez",
+  "encabezadoSuperior": "Bruno Olivera & Andrea Mendez",
+  "tituloPeriodico": "Noticia de última hora",
+  "granTitular": "NOS CASAMOS",
+  "fechaTextoHeader": "Sábado, 9 Agosto 2025",
+  "fechaCorazones": "SÁBADO, 9 AGOSTO 2027",
+  "fechaISO": "2027-08-09T18:00:00",
+  "lugarResumen": "Ciudad de México",
+  "pases": {
+    "etiquetaDefault": "Pase de Invitación",
+    "mensajeReservado": "Hemos reservado {{pases}} pases especialmente para ti.",
+    "mensajeGeneral": "¡Tenemos el honor de contar con tu presencia!"
+  },
+  "musica": {
+    "titulo": "Nuestra Canción Romántica",
+    "audioUrl": "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-waltz-113426.mp3"
+  },
+  "historia": {
+    "titulo": "Nuestra Historia",
+    "parrafo1": "Nos conocimos en el trabajo, sin imaginar que entre, reuniones, tareas y refrigerios apurados encontraríamos algo mucho más importante: el uno al otro... Desde aquel 2 de enero del 2019 hemos reído, madurado, llorado un poquito (pero siempre juntos), y aprendimos que el amor verdadero se construye día a día.",
+    "parrafo2": "Poco a poco empezamos a crecer emocionalmente hasta que \"Llegó el capítulo más emocionante! \"Nos casamos\" y porque en algún momento fuiste cómplice de una risa, un consejo, un abrazo o una anécdota, tú también eres parte de esta historia, es por eso que estás cordialmente invitado/a a celebrar con nosotros este día tan especial."
+  },
+  "ceremonia": {
+    "titulo": "Ceremonia Religiosa",
+    "hora": "Hora 06:00 pm",
+    "lugar": "\"Templo de San Francisco\"",
+    "ciudad": "Ciudad de México",
+    "mapaUrl": "https://maps.google.com/?q=Templo+de+San+Francisco+CDMX"
+  },
+  "recepcion": {
+    "titulo": "Recepción",
+    "hora": "Hora 08:00 pm",
+    "lugar": "\"MOVA Eventos\"",
+    "ciudad": "Miguel Hidalgo, CDMX",
+    "mapaUrl": "https://maps.google.com/?q=MOVA+Eventos+CDMX"
+  },
+  "itinerario": [
+    { "hora": "05:00 pm", "titulo": "Ceremonia Religiosa", "icon": "church" },
+    { "hora": "07:00 pm", "titulo": "Recepción", "icon": "rings" },
+    { "hora": "08:00 pm", "titulo": "Vals de Novios", "icon": "dance" },
+    { "hora": "08:30 pm", "titulo": "Cena", "icon": "dinner" },
+    { "hora": "09:30 pm", "titulo": "Fiesta", "icon": "party" }
+  ],
+  "notaNinos": "Amamos a los niños, pero creemos que esta noche se merecen disfrutar solos como pareja, por eso en esta ocasión será solo para adultos.",
+  "dressCode": {
+    "titulo": "Dress code",
+    "subtitulo": "Elegante - Formal",
+    "ellas": "Ellas: Vestido largo",
+    "ellos": "Ellos: Traje y corbata",
+    "notaColor": "(Se reserva el color blanco para la Novia)"
+  },
+  "regalos": {
+    "titulo": "Sugerencia de Regalo",
+    "mensaje": "¡Que nos acompañes es lo más importante! Y si está en tu disposición realizar una muestra de cariño estaremos muy agradecidos.",
+    "cuentas": [
+      {
+        "titular": "Bruno Mendez Huari",
+        "detalles": [
+          { "etiqueta": "BBVA", "valor": "1111 1111 0123456789" },
+          { "etiqueta": "PLIN", "valor": "000 333 777" }
+        ]
+      },
+      {
+        "titular": "Andrea Olivera Alves",
+        "detalles": [
+          { "etiqueta": "BCP", "valor": "0000 XXXXX 22222" },
+          { "etiqueta": "YAPE", "valor": "000 555 777" }
+        ]
+      }
+    ]
+  },
+  "whatsappRSVP": "5215500000000",
+  "imagenes": {
+    "portada": "./assets/portada_novios.jpg",
+    "historia1": "./assets/historia_1.jpg",
+    "historia2": "./assets/historia_2.jpg",
+    "historia3": "./assets/historia_2.jpg",
+    "cuentaRegresiva": "./assets/cuenta_regresiva.jpg"
+  }
+}

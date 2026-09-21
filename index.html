@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Boda - Invitación Estilo Periódico</title>
+  <meta name="description" content="Invitación de boda estilo periódico elegante y romántica. ¡Acompáñanos a celebrar nuestro gran día!" />
+
+  <!-- Google Fonts: Vintage Newspaper Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- Top Sticky Music Player Bar -->
+  <header class="top-music-bar" id="music-bar">
+    <div class="music-container">
+      <span class="music-label">Dale play para escuchar nuestra canción</span>
+      <button id="btn-play-audio" class="music-btn" aria-label="Reproducir música">
+        <svg id="icon-play" class="icon-music" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+        <svg id="icon-pause" class="icon-music hidden" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <div class="music-equalizer hidden" id="equalizer">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Audio Element -->
+  <audio id="audio-player" loop preload="metadata"></audio>
+
+  <!-- Main Newspaper Wrapper -->
+  <main class="newspaper-container" id="newspaper">
+
+    <!-- Newspaper Header Meta -->
+    <div class="newspaper-meta-bar">
+      <div class="meta-left" id="txt-encabezado-superior">Bruno Olivera & Andrea Mendez</div>
+      <div class="meta-center">
+        <h2 class="newspaper-issue-title" id="txt-titulo-periodico">Noticia de última hora</h2>
+      </div>
+      <div class="meta-right" id="txt-fecha-header">Sábado, 9 Agosto 2025</div>
+    </div>
+
+    <!-- Triple Rule Border -->
+    <div class="rule-divider thick-thin"></div>
+
+    <!-- Main Front-Page Title -->
+    <section class="hero-section">
+      <h1 class="main-headline" id="txt-gran-titular">NOS CASAMOS</h1>
+      
+      <div class="hearts-date-bar">
+        <span class="heart-icon">🖤🖤</span>
+        <span class="date-text" id="txt-fecha-corazones">SÁBADO, 9 AGOSTO 2025</span>
+        <span class="heart-icon">🖤🖤</span>
+      </div>
+
+      <!-- Personalized Pass / Ticket Box (visible when link has ?invitado=...&pases=...) -->
+      <div id="personalized-pass-box" class="pass-ticket-box hidden">
+        <div class="pass-stamp">PASE EXCLUSIVO 🎟️</div>
+        <h3 class="pass-guest-name" id="pass-guest-name">Familia Mendoza</h3>
+        <p class="pass-count-text" id="pass-count-text">Hemos reservado <strong>4 pases</strong> especialmente para ti.</p>
+      </div>
+
+      <div class="rule-divider thin"></div>
+
+      <!-- Main Cover Photo -->
+      <div class="main-photo-frame">
+        <img id="img-portada" src="./assets/portada_novios.jpg" alt="Foto principal de novios" class="newspaper-img" />
+        <p class="photo-caption" id="txt-lugar-resumen">Edición Especial - Celebración de nuestra unión en Ciudad de México</p>
+      </div>
+    </section>
+
+    <!-- SECTION: Nuestra Historia -->
+    <section class="section-container" id="sec-historia">
+      <div class="section-title-wrap">
+        <span class="title-line"></span>
+        <h2 class="section-title" id="txt-titulo-historia">Nuestra Historia</h2>
+        <span class="title-line"></span>
+      </div>
+
+      <div class="story-grid">
+        <div class="story-text-col">
+          <p id="txt-historia-1" class="story-paragraph">
+            Nos conocimos en el trabajo, sin imaginar que entre, reuniones, tareas y refrigerios apurados encontraríamos algo mucho más importante: el uno al otro...
+          </p>
+          <p id="txt-historia-2" class="story-paragraph">
+            Poco a poco empezamos a crecer emocionalmente hasta que "Llegó el capítulo más emocionante! "Nos casamos"...
+          </p>
+        </div>
+        <div class="story-gallery-col">
+          <div class="gallery-stack">
+            <div class="polaroid-frame photo-1">
+              <img id="img-historia-1" src="./assets/historia_1.jpg" alt="Historia foto 1" />
+            </div>
+            <div class="polaroid-frame photo-2">
+              <img id="img-historia-2" src="./assets/historia_2.jpg" alt="Historia foto 2" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Programa de Boda -->
+    <section class="section-container" id="sec-programa">
+      <div class="section-title-wrap">
+        <span class="title-line"></span>
+        <h2 class="section-title">Programa de boda</h2>
+        <span class="title-line"></span>
+      </div>
+
+      <div class="program-grid">
+        <!-- Cards Column -->
+        <div class="venue-cards-col">
+          <!-- Ceremonia Religiosa -->
+          <div class="venue-card">
+            <h3 class="venue-title" id="txt-ceremonia-titulo">Ceremonia Religiosa</h3>
+            <div class="card-rule"></div>
+            <p class="venue-time" id="txt-ceremonia-hora">Hora 06:00 pm</p>
+            <p class="venue-place" id="txt-ceremonia-lugar">"Templo de San Francisco"</p>
+            <p class="venue-city" id="txt-ceremonia-ciudad">Ciudad de México</p>
+            <a id="btn-ceremonia-mapa" href="#" target="_blank" class="btn-map">Ver mapa</a>
+          </div>
+
+          <!-- Recepción -->
+          <div class="venue-card">
+            <h3 class="venue-title" id="txt-recepcion-titulo">Recepción</h3>
+            <div class="card-rule"></div>
+            <p class="venue-time" id="txt-recepcion-hora">Hora 08:00 pm</p>
+            <p class="venue-place" id="txt-recepcion-lugar">"MOVA Eventos"</p>
+            <p class="venue-city" id="txt-recepcion-ciudad">Miguel Hidalgo, CDMX</p>
+            <a id="btn-recepcion-mapa" href="#" target="_blank" class="btn-map">Ver mapa</a>
+          </div>
+        </div>
+
+        <!-- Timeline Column -->
+        <div class="timeline-col">
+          <ul class="timeline-list" id="timeline-container">
+            <!-- Dynamic items populated from JS -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Adults Only Callout Box -->
+      <div class="adults-only-box">
+        <p id="txt-nota-ninos">
+          Amamos a los niños, pero creemos que esta noche se merecen disfrutar solos como pareja, por eso en esta ocasión será solo para adultos.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION: Dress Code -->
+    <section class="section-container" id="sec-dresscode">
+      <div class="section-title-wrap">
+        <span class="title-line"></span>
+        <h2 class="section-title" id="txt-dress-titulo">Dress code</h2>
+        <span class="title-line"></span>
+      </div>
+
+      <div class="dress-card">
+        <h3 class="dress-subtitle" id="txt-dress-subtitulo">Elegante - Formal</h3>
+        <div class="dress-icon-wrap">
+          <!-- Tuxedo & Dress Illustration -->
+          <svg class="dress-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+            <!-- Dress -->
+            <path d="M 30 30 Q 35 45 32 55 Q 25 80 20 90 L 45 90 Q 40 80 38 55 Q 35 45 40 30 Z" fill="none" stroke="currentColor"/>
+            <path d="M 30 30 Q 35 25 40 30" fill="none"/>
+            <!-- Suit -->
+            <path d="M 58 30 L 68 30 L 80 40 L 76 90 L 70 90 L 68 55 L 66 90 L 60 90 L 56 40 Z" fill="none" stroke="currentColor"/>
+            <path d="M 68 30 L 68 45 L 65 37 L 68 30" fill="currentColor"/>
+            <path d="M 68 34 L 70 38 L 68 42 L 66 38 Z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="dress-info">
+          <span id="txt-dress-ellas" class="dress-item">Ellas: Vestido largo</span>
+          <span class="dress-sep">•</span>
+          <span id="txt-dress-ellos" class="dress-item">Ellos: Traje y corbata</span>
+        </div>
+        <p id="txt-dress-nota" class="dress-note">(Se reserva el color blanco para la Novia)</p>
+      </div>
+    </section>
+
+    <!-- SECTION: Sugerencia de Regalo -->
+    <section class="section-container" id="sec-regalos">
+      <div class="section-title-wrap">
+        <span class="title-line"></span>
+        <h2 class="section-title" id="txt-regalos-titulo">Sugerencia de Regalo</h2>
+        <span class="title-line"></span>
+      </div>
+
+      <div class="gift-card">
+        <p id="txt-regalos-mensaje" class="gift-message">
+          ¡Que nos acompañes es lo más importante! Y si está en tu disposición realizar una muestra de cariño estaremos muy agradecidos.
+        </p>
+
+        <div class="bank-accounts-grid" id="bank-accounts-container">
+          <!-- Bank account cards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Cuenta Regresiva -->
+    <section class="section-container" id="sec-faltan">
+      <div class="section-title-wrap">
+        <span class="title-line"></span>
+        <h2 class="section-title">Faltan</h2>
+        <span class="title-line"></span>
+      </div>
+
+      <!-- Timer Display Box -->
+      <div class="countdown-box">
+        <div class="timer-digits">
+          <div class="timer-unit">
+            <span id="timer-days" class="number">00</span>
+            <span class="label">DÍAS</span>
+          </div>
+          <span class="colon">:</span>
+          <div class="timer-unit">
+            <span id="timer-hours" class="number">00</span>
+            <span class="label">HORAS</span>
+          </div>
+          <span class="colon">:</span>
+          <div class="timer-unit">
+            <span id="timer-minutes" class="number">00</span>
+            <span class="label">MINUTOS</span>
+          </div>
+          <span class="colon">:</span>
+          <div class="timer-unit">
+            <span id="timer-seconds" class="number">00</span>
+            <span class="label">SEGUNDOS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Couple Romantic Photo Frame -->
+      <div class="countdown-photo-frame">
+        <img id="img-cuenta-regresiva" src="./assets/cuenta_regresiva.jpg" alt="Novios noche" />
+        <div class="photo-overlay-tag">
+          🖤 <span id="txt-corazones-foot">SÁBADO, 9 AGOSTO 2025</span> 🖤
+        </div>
+      </div>
+    </section>
+
+    <!-- Newspaper Footer -->
+    <footer class="newspaper-footer">
+      <div class="rule-divider thick-thin"></div>
+      <p class="footer-credit">Con amor & amor eterno — <span id="txt-footer-novios">Bruno & Andrea</span></p>
+    </footer>
+
+  </main>
+
+  <!-- Sticky Bottom Action Floating Buttons -->
+  <div class="floating-actions">
+    <button id="btn-open-rsvp" class="action-btn btn-rsvp">
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M.457 19.141l.034-.134.012-.045a8.9 8.9 0 011.666-3.214C1.196 14.331.671 12.695.671 10.963c0-5.111 4.67-9.27 10.414-9.27 5.745 0 10.415 4.159 10.415 9.27 0 5.112-4.67 9.271-10.415 9.271-1.637 0-3.208-.344-4.63-1.002a9.7 9.7 0 01-4.048.887 2.1 2.1 0 01-1.95-1.018z"/></svg>
+      Confirmar Asistencia
+    </button>
+    <button id="btn-open-editor" class="action-btn btn-editor hidden" title="Personalizar datos de config.json">
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Editar Config
+    </button>
+  </div>
+
+  <!-- RSVP Modal -->
+  <div id="modal-rsvp" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="btn-close-rsvp">&times;</button>
+      <h3 class="modal-title">Confirmar Asistencia</h3>
+      <p class="modal-subtitle">Envía tu confirmación directamente a los novios vía WhatsApp</p>
+      
+      <form id="form-rsvp" class="modal-form">
+        <div class="form-group">
+          <label for="rsvp-nombre">Nombre completo:</label>
+          <input type="text" id="rsvp-nombre" required placeholder="Ej. Carlos Mendoza" />
+        </div>
+        <div class="form-group">
+          <label for="rsvp-asistencia">¿Asistirás al evento?</label>
+          <select id="rsvp-asistencia">
+            <option value="¡Sí, con mucho gusto asistiré!">¡Sí, asistiré con mucho gusto! 🎉</option>
+            <option value="Lamentablemente no podré asistir">Lamentablemente no podré asistir 😢</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rsvp-invitados">Número de acompañantes:</label>
+          <input type="number" id="rsvp-invitados" min="1" max="5" value="1" />
+        </div>
+        <div class="form-group">
+          <label for="rsvp-mensaje">Mensaje para los novios:</label>
+          <textarea id="rsvp-mensaje" rows="3" placeholder="¡Muchas felicidades en su gran día!"></textarea>
+        </div>
+        <button type="submit" class="btn-submit-rsvp">Enviar por WhatsApp 📱</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Config Editor Modal / Drawer -->
+  <div id="modal-editor" class="modal-overlay hidden">
+    <div class="modal-card modal-large">
+      <button class="modal-close" id="btn-close-editor">&times;</button>
+      <h3 class="modal-title">⚙️ Editor de Configuración (`config.json`)</h3>
+      <p class="modal-subtitle">Modifica los datos en vivo sin base de datos ni servidor. Presiona <strong>Descargar config.json</strong> para guardar tus cambios en el archivo estático.</p>
+
+      <div class="editor-tabs">
+        <button class="tab-btn active" data-tab="tab-asistentes">📋 Lista de Asistentes Registrados</button>
+        <button class="tab-btn" data-tab="tab-generador">✉️ Generar Enlaces</button>
+        <button class="tab-btn" data-tab="tab-general">General</button>
+        <button class="tab-btn" data-tab="tab-historia">Historia</button>
+        <button class="tab-btn" data-tab="tab-lugares">Lugares & Itinerario</button>
+        <button class="tab-btn" data-tab="tab-bancos">Cuentas Bancarias</button>
+      </div>
+
+      <div class="editor-content">
+        <!-- Tab Lista de Asistentes Registrados (RSVP) -->
+        <div id="tab-asistentes" class="tab-pane active">
+          <div class="asistentes-stats-bar">
+            <div class="stat-card">
+              <span class="stat-number" id="stat-total-personas">0</span>
+              <span class="stat-label">Personas Confirmadas</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" id="stat-total-registros">0</span>
+              <span class="stat-label">Familias / Grupos</span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="asistentes-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Invitado / Familia</th>
+                  <th>Estado</th>
+                  <th>Pases</th>
+                  <th>Mensaje</th>
+                </tr>
+              </thead>
+              <tbody id="asistentes-tbody">
+                <tr><td colspan="5" class="empty-table">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="editor-actions">
+            <button id="btn-export-csv" class="btn-editor-action preview">📊 Descargar Excel / CSV</button>
+            <button id="btn-export-json" class="btn-editor-action download">📥 Descargar JSON</button>
+            <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️ Limpiar Lista</button>
+          </div>
+        </div>
+        <!-- Tab General -->
+        <div id="tab-general" class="tab-pane">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Novio:</label>
+              <input type="text" id="edit-novio" />
+            </div>
+            <div class="form-group">
+              <label>Novia:</label>
+              <input type="text" id="edit-novia" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Título Periódico:</label>
+              <input type="text" id="edit-tituloPeriodico" />
+            </div>
+            <div class="form-group">
+              <label>Gran Titular:</label>
+              <input type="text" id="edit-granTitular" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Fecha Formateada:</label>
+              <input type="text" id="edit-fechaTextoHeader" />
+            </div>
+            <div class="form-group">
+              <label>Fecha ISO (para temporizador):</label>
+              <input type="datetime-local" id="edit-fechaISO" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp (con código de país, ej. 5215500000000):</label>
+            <input type="text" id="edit-whatsapp" />
+          </div>
+          <div class="form-group">
+            <label>URL Canción MP3:</label>
+            <input type="text" id="edit-audioUrl" />
+          </div>
+        </div>
+
+        <!-- Tab Historia -->
+        <div id="tab-historia" class="tab-pane">
+          <div class="form-group">
+            <label>Párrafo 1:</label>
+            <textarea id="edit-historia-1" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Párrafo 2:</label>
+            <textarea id="edit-historia-2" rows="4"></textarea>
+          </div>
+        </div>
+
+        <!-- Tab Lugares -->
+        <div id="tab-lugares" class="tab-pane">
+          <h4>Ceremonia Religiosa</h4>
+          <div class="form-row">
+            <div class="form-group"><label>Lugar:</label><input type="text" id="edit-ceremonia-lugar" /></div>
+            <div class="form-group"><label>Hora:</label><input type="text" id="edit-ceremonia-hora" /></div>
+          </div>
+          <div class="form-group"><label>Link Google Maps:</label><input type="text" id="edit-ceremonia-mapa" /></div>
+
+          <h4>Recepción</h4>
+          <div class="form-row">
+            <div class="form-group"><label>Lugar:</label><input type="text" id="edit-recepcion-lugar" /></div>
+            <div class="form-group"><label>Hora:</label><input type="text" id="edit-recepcion-hora" /></div>
+          </div>
+          <div class="form-group"><label>Link Google Maps:</label><input type="text" id="edit-recepcion-mapa" /></div>
+        </div>
+
+        <!-- Tab Bancos -->
+        <div id="tab-bancos" class="tab-pane">
+          <p class="small-info">Modifica los datos bancarios o titulares:</p>
+          <div class="form-group">
+            <label>Titular 1 & Bancos (Texto libre o formato):</label>
+            <input type="text" id="edit-banco-titular1" placeholder="Nombre titular 1" />
+            <input type="text" id="edit-banco-num1" placeholder="BBVA: 1111 1111 0123456789 | PLIN: 000 333 777" />
+          </div>
+          <div class="form-group">
+            <label>Titular 2 & Bancos:</label>
+            <input type="text" id="edit-banco-titular2" placeholder="Nombre titular 2" />
+            <input type="text" id="edit-banco-num2" placeholder="BCP: 0000 XXXXX 22222 | YAPE: 000 555 777" />
+          </div>
+        </div>
+
+        <!-- Tab Generador de Enlaces Personalizados -->
+        <div id="tab-generador" class="tab-pane">
+          <p class="small-info">Crea un enlace personalizado para cada invitado con su nombre y cantidad de pases asignados:</p>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="gen-nombre">Nombre del Invitado / Familia:</label>
+              <input type="text" id="gen-nombre" placeholder="Ej. Familia Mendoza" />
+            </div>
+            <div class="form-group">
+              <label for="gen-pases">Número de Pases:</label>
+              <input type="number" id="gen-pases" min="1" max="10" value="2" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Enlace Personalizado Generado:</label>
+            <input type="text" id="gen-link-result" readonly placeholder="https://tuboda.com/?invitado=Familia+Mendoza&pases=2" />
+          </div>
+
+          <div class="form-group">
+            <label>Mensaje listo para enviar por WhatsApp:</label>
+            <textarea id="gen-msg-result" rows="4" readonly></textarea>
+          </div>
+
+          <div class="form-row">
+            <button id="btn-copy-guest-link" class="btn-editor-action preview">Copiar Solo Enlace 🔗</button>
+            <button id="btn-copy-guest-msg" class="btn-editor-action download">Copiar Mensaje Completo 📲</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-actions">
+        <button id="btn-save-preview" class="btn-editor-action preview">Aplicar Cambios en Pantalla</button>
+        <button id="btn-download-config" class="btn-editor-action download">📥 Descargar config.json</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification element -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
