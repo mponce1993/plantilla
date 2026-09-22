@@ -1,13 +1,13 @@
 {
-  "novio": "Bruno Olivera",
-  "novia": "Andrea Mendez",
-  "encabezadoSuperior": "Bruno Olivera & Andrea Mendez",
+  "novia": "Fabiola Elizabeth Ponce Pumalema",
+  "novio": "Juan Pablo Vallejo Mata",
+  "encabezadoSuperior": "Fabiola Elizabeth & Juan Pablo",
   "tituloPeriodico": "Noticia de última hora",
   "granTitular": "NOS CASAMOS",
-  "fechaTextoHeader": "Sábado, 9 Agosto 2025",
-  "fechaCorazones": "SÁBADO, 9 AGOSTO 2027",
-  "fechaISO": "2027-08-09T18:00:00",
-  "lugarResumen": "Ciudad de México",
+  "fechaTextoHeader": "Sábado, 12 Diciembre 2026",
+  "fechaCorazones": "SÁBADO, 12 DICIEMBRE 2026",
+  "fechaISO": "2026-12-12T19:00:00",
+  "lugarResumen": "Riobamba, Ecuador",
   "pases": {
     "etiquetaDefault": "Pase de Invitación",
     "mensajeReservado": "Hemos reservado {{pases}} pases especialmente para ti.",
@@ -75,19 +75,6 @@
     "mensaje": "¡Que nos acompañes es lo más importante! Y si está en tu disposición realizar una muestra de cariño estaremos muy agradecidos.",
     "cuentas": [
       {
-        "titular": "Bruno Mendez Huari",
-        "detalles": [
-          {
-            "etiqueta": "BBVA",
-            "valor": "1111 1111 0123456789"
-          },
-          {
-            "etiqueta": "PLIN",
-            "valor": "000 333 777"
-          }
-        ]
-      },
-      {
         "titular": "Andrea Olivera Alves",
         "detalles": [
           {
@@ -97,6 +84,19 @@
           {
             "etiqueta": "YAPE",
             "valor": "000 555 777"
+          }
+        ]
+      },
+      {
+        "titular": "Bruno Mendez Huari",
+        "detalles": [
+          {
+            "etiqueta": "BBVA",
+            "valor": "1111 1111 0123456789"
+          },
+          {
+            "etiqueta": "PLIN",
+            "valor": "000 333 777"
           }
         ]
       }

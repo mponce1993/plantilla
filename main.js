@@ -117,7 +117,7 @@ async function loadConfiguration() {
 // Render data from config JSON to HTML elements
 function renderData(config) {
   // Metadata & Titles
-  setTxt('txt-encabezado-superior', config.encabezadoSuperior || `${config.novio} & ${config.novia}`);
+  setTxt('txt-encabezado-superior', config.encabezadoSuperior || `${config.novia} & ${config.novio}`);
   setTxt('txt-titulo-periodico', config.tituloPeriodico || 'Noticia de última hora');
   setTxt('txt-fecha-header', config.fechaTextoHeader || '');
   setTxt('txt-gran-titular', config.granTitular || 'NOS CASAMOS');
@@ -181,7 +181,7 @@ function renderData(config) {
 
   // Footer & Hearts Tag
   setTxt('txt-corazones-foot', config.fechaCorazones || '');
-  setTxt('txt-footer-novios', `${config.novio} & ${config.novia}`);
+  setTxt('txt-footer-novios', `${config.novia} & ${config.novio}`);
 }
 
 // Render Timeline
@@ -333,7 +333,7 @@ function setupEventListeners() {
 
     // Prepare WhatsApp Message
     const waNum = appConfig?.whatsappRSVP || '5215500000000';
-    const textMsg = `¡Hola ${appConfig?.novio} y ${appConfig?.novia}! 👋\n\nSoy *${nombre}*.\n*Asistencia:* ${asistencia}\n*Pases Asignados Originales:* ${pasesAsignados}\n*Personas Confirmadas:* ${invitados}\n*Mensaje:* ${mensaje || '¡Nos vemos pronto!'}`;
+    const textMsg = `¡Hola ${appConfig?.novia} y ${appConfig?.novio}! 👋\n\nSoy *${nombre}*.\n*Asistencia:* ${asistencia}\n*Pases Asignados Originales:* ${pasesAsignados}\n*Personas Confirmadas:* ${invitados}\n*Mensaje:* ${mensaje || '¡Nos vemos pronto!'}`;
     
     const waUrl = `https://wa.me/${waNum}?text=${encodeURIComponent(textMsg)}`;
     window.open(waUrl, '_blank');
@@ -365,8 +365,8 @@ function setupEventListeners() {
 // Populate Editor Fields from appConfig
 function populateEditorFields() {
   if (!appConfig) return;
-  setVal('edit-novio', appConfig.novio);
   setVal('edit-novia', appConfig.novia);
+  setVal('edit-novio', appConfig.novio);
   setVal('edit-tituloPeriodico', appConfig.tituloPeriodico);
   setVal('edit-granTitular', appConfig.granTitular);
   setVal('edit-fechaTextoHeader', appConfig.fechaTextoHeader);
@@ -397,9 +397,9 @@ function populateEditorFields() {
 
 // Save Editor Input values into appConfig & localStorage
 function saveEditorToConfig() {
-  appConfig.novio = getVal('edit-novio') || appConfig.novio;
   appConfig.novia = getVal('edit-novia') || appConfig.novia;
-  appConfig.encabezadoSuperior = `${appConfig.novio} & ${appConfig.novia}`;
+  appConfig.novio = getVal('edit-novio') || appConfig.novio;
+  appConfig.encabezadoSuperior = `${appConfig.novia} & ${appConfig.novio}`;
   appConfig.tituloPeriodico = getVal('edit-tituloPeriodico') || appConfig.tituloPeriodico;
   appConfig.granTitular = getVal('edit-granTitular') || appConfig.granTitular;
   appConfig.fechaTextoHeader = getVal('edit-fechaTextoHeader') || appConfig.fechaTextoHeader;
@@ -552,7 +552,7 @@ function setupLinkGenerator() {
     const baseUrl = `${window.location.origin}${window.location.pathname}`;
     const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
 
-    const novios = appConfig ? `${appConfig.novio} & ${appConfig.novia}` : 'Bruno & Andrea';
+    const novios = appConfig ? `${appConfig.novia} & ${appConfig.novio}` : 'Andrea & Bruno';
     const pasesText = pases == 1 ? '1 pase' : `${pases} pases`;
 
     const fullMessage = `¡Hola ${nombre}! 💌\n\nTenemos el gran honor de invitarte a nuestra boda. Hemos reservado especialmente ${pasesText} para ti.\n\nPuedes ver nuestra invitación oficial en el siguiente enlace:\n${fullUrl}\n\nCon todo nuestro cariño,\n${novios}`;
