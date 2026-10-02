@@ -628,41 +628,39 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"><\/script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #fdf8f2; font-family: Georgia, serif; }
-    .card { width: 148mm; background: #fdf8f2; color: #2c2c2c; margin: 0 auto; }
-    .bar-wine { background: #6b2737; height: 14px; }
-    .bar-gold { background: #d4a843; height: 4px; }
-    .content { padding: 28px 32px; }
-    .header { text-align: center; margin-bottom: 18px; }
-    .header .subtitle { font-size: 10px; letter-spacing: 4px; color: #6b2737; text-transform: uppercase; margin-bottom: 8px; }
-    .header h1 { font-size: 28px; font-weight: bold; color: #2c2c2c; letter-spacing: 3px; margin-bottom: 6px; }
-    .header .italic { font-size: 14px; color: #6b2737; font-style: italic; }
-    .fecha-bar { border-top: 2px solid #d4a843; border-bottom: 2px solid #d4a843; padding: 10px 0; text-align: center; margin-bottom: 20px; }
-    .fecha-bar p { font-size: 13px; font-weight: bold; letter-spacing: 3px; color: #2c2c2c; }
-    .venues { display: flex; gap: 12px; margin-bottom: 20px; }
-    .venue-box { flex: 1; background: #fff; border: 1px solid #e8dcc8; padding: 12px; text-align: center; }
-    .venue-box .label { font-size: 8px; letter-spacing: 3px; color: #6b2737; text-transform: uppercase; margin-bottom: 6px; }
-    .venue-box .place { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
-    .venue-box .time { font-size: 11px; color: #666; }
-    .pass-box { background: #6b2737; color: #fff; padding: 16px 20px; text-align: center; margin-bottom: 20px; }
-    .pass-box h2 { font-size: 22px; font-weight: bold; color: #d4a843; margin-bottom: 10px; }
-    .pass-box p { font-size: 13px; opacity: 0.95; line-height: 1.5; }
-    .qr-section { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
-    .qr-wrap { text-align: center; flex-shrink: 0; }
-    .qr-wrap p { font-size: 9px; color: #999; margin-top: 4px; }
-    .link-section { flex: 1; }
-    .link-section p { font-size: 12px; color: #444; margin-bottom: 12px; font-style: italic; }
-    .link-btn { display: block; background: #6b2737; color: #fff; padding: 12px; text-decoration: none; font-size: 13px; letter-spacing: 1px; font-family: Arial, sans-serif; font-weight: bold; text-align: center; }
-    .url-text { font-size: 8px; color: #aaa; word-break: break-all; margin-top: 6px; font-family: Arial, sans-serif; }
-    .footer-verse { border-top: 1px solid #d4a843; padding-top: 12px; text-align: center; }
-    .footer-verse p { font-size: 10px; font-style: italic; color: #666; margin-bottom: 4px; }
-    .footer-verse small { font-size: 9px; color: #999; }
+    body { background: #fbf9f5; font-family: 'Cormorant Garamond', Georgia, serif; }
+    .card { width: 148mm; min-height: 210mm; height: 210mm; background: #fbf9f5; color: #1a1a1a; margin: 0 auto; display: flex; flex-direction: column; position: relative; }
+    .top-border { border-top: 6px solid #222; border-bottom: 2px solid #222; height: 14px; width: 100%; margin-bottom: 25px; }
+    .bottom-border { border-top: 2px solid #222; border-bottom: 6px solid #222; height: 14px; width: 100%; position: absolute; bottom: 0; }
+    .content { padding: 0 32px; flex: 1; display: flex; flex-direction: column; }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header .subtitle { font-size: 11px; letter-spacing: 5px; color: #555; text-transform: uppercase; margin-bottom: 10px; font-family: Arial, sans-serif; }
+    .header h1 { font-size: 34px; font-weight: bold; color: #1a1a1a; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; }
+    .header .italic { font-size: 16px; color: #555; font-style: italic; }
+    .fecha-bar { border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 12px 0; text-align: center; margin-bottom: 25px; }
+    .fecha-bar p { font-size: 14px; font-weight: bold; letter-spacing: 4px; color: #1a1a1a; }
+    .venues { display: flex; gap: 15px; margin-bottom: 25px; }
+    .venue-box { flex: 1; background: transparent; border: 1px solid #222; padding: 15px; text-align: center; }
+    .venue-box .label { font-size: 9px; letter-spacing: 3px; color: #555; text-transform: uppercase; margin-bottom: 8px; font-family: Arial, sans-serif; }
+    .venue-box .place { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+    .venue-box .time { font-size: 12px; color: #555; font-style: italic; }
+    .pass-box { background: #222; color: #fbf9f5; padding: 20px; text-align: center; margin-bottom: 25px; border: 1px solid #222; }
+    .pass-box h2 { font-size: 24px; font-weight: bold; margin-bottom: 12px; font-style: italic; }
+    .pass-box p { font-size: 14px; opacity: 0.95; line-height: 1.6; }
+    .qr-section { display: flex; gap: 20px; align-items: center; margin-bottom: 30px; }
+    .qr-wrap { text-align: center; flex-shrink: 0; padding: 10px; border: 1px solid #222; background: #fff; }
+    .qr-wrap p { font-size: 9px; color: #555; margin-top: 6px; font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+    .link-section { flex: 1; text-align: center; }
+    .link-section p { font-size: 13px; color: #1a1a1a; margin-bottom: 15px; font-style: italic; }
+    .link-btn { display: inline-block; background: #222; color: #fbf9f5; padding: 12px 24px; text-decoration: none; font-size: 12px; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: bold; text-transform: uppercase; border: 1px solid #222; }
+    .footer-verse { margin-top: auto; border-top: 1px solid #222; padding-top: 15px; text-align: center; padding-bottom: 30px; }
+    .footer-verse p { font-size: 12px; font-style: italic; color: #1a1a1a; margin-bottom: 5px; }
+    .footer-verse small { font-size: 10px; color: #555; font-family: Arial, sans-serif; letter-spacing: 1px; }
   </style>
 </head>
 <body>
   <div class="card" id="card">
-    <div class="bar-wine"></div>
-    <div class="bar-gold"></div>
+    <div class="top-border"></div>
     <div class="content">
       <div class="header">
         <p class="subtitle">Tenemos el honor de invitarles a</p>
@@ -689,30 +687,28 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
       <div class="qr-section">
         <div class="qr-wrap">
           <div id="qrcode"></div>
-          <p>Escanea para abrir</p>
+          <p>ESCANEA PARA ABRIR</p>
         </div>
         <div class="link-section">
-          <p>Toca el enlace para ver la invitacion completa con nuestra cancion</p>
-          <a class="link-btn" href="${fullUrl}">ABRIR INVITACION</a>
-          <p class="url-text">${fullUrl}</p>
+          <p>Toca el botón para ver la invitación oficial con nuestra música</p>
+          <a class="link-btn" href="${fullUrl}">ABRIR INVITACIÓN</a>
         </div>
       </div>
       <div class="footer-verse">
-        <p>Las muchas aguas no podran apagar el amor, ni lo ahogaran los rios</p>
-        <small>Cantar de los Cantares 8:7</small>
+        <p>"Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos"</p>
+        <small>CANTAR DE LOS CANTARES 8:7</small>
       </div>
     </div>
-    <div class="bar-gold"></div>
-    <div class="bar-wine"></div>
+    <div class="bottom-border"></div>
   </div>
   <script>
     new QRCode(document.getElementById('qrcode'), {
       text: '${fullUrl}', width: 110, height: 110,
-      colorDark: '#6b2737', colorLight: '#ffffff',
+      colorDark: '#222222', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
     setTimeout(function() {
-      var opt = { margin: 0, filename: '${filename}', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#fdf8f2' }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' } };
+      var opt = { margin: 0, filename: '${filename}', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#fbf9f5' }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' } };
       html2pdf().set(opt).from(document.getElementById('card')).save().then(function() { window.close(); });
     }, 900);
   <\/script>
