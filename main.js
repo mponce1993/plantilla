@@ -690,8 +690,8 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
           <p>ESCANEA PARA ABRIR</p>
         </div>
         <div class="link-section">
-          <p>Toca el botón para ver la invitación oficial con nuestra música</p>
-          <a class="link-btn" href="${fullUrl}">ABRIR INVITACIÓN</a>
+          <p>Toca el botón para ver la invitación oficial y confirmar la asistencia</p>
+          <a class="link-btn" href="${fullUrl}">CONFIRMAR ASISTENCIA</a>
         </div>
       </div>
       <div class="footer-verse">
