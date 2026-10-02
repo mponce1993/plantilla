@@ -96,10 +96,12 @@ async function loadConfiguration() {
     
     const localDraft = localStorage.getItem('wedding_config_draft');
     if (localDraft) {
-      appConfig = JSON.parse(localDraft);
-      // Always sync audioUrl and music title with master config if set to local assets
-      if (masterConfig.musica) {
-        appConfig.musica = masterConfig.musica;
+      const parsedDraft = JSON.parse(localDraft);
+      if (parsedDraft.novia?.includes('Andrea') || parsedDraft.novia?.includes('Fabiola Elizabeth')) {
+        localStorage.removeItem('wedding_config_draft');
+        appConfig = masterConfig;
+      } else {
+        appConfig = parsedDraft;
       }
     } else {
       appConfig = masterConfig;
@@ -129,13 +131,14 @@ function renderData(config) {
     setImg('img-portada', config.imagenes.portada);
     setImg('img-historia-1', config.imagenes.historia1);
     setImg('img-historia-2', config.imagenes.historia2);
+    setImg('img-foto-5', config.imagenes.itinerarioFoto || config.imagenes.historia2);
     setImg('img-cuenta-regresiva', config.imagenes.cuentaRegresiva);
   }
 
-  // Historia
+  // Historia / Dos Almas
   if (config.historia) {
-    setTxt('txt-titulo-historia', config.historia.titulo || 'Nuestra Historia');
-    setTxt('txt-historia-1', config.historia.parrafo1 || '');
+    setTxt('txt-titulo-historia', config.historia.titulo || 'DOS ALMAS');
+    setHtml('txt-historia-1', (config.historia.parrafo1 || '').replace(/\n/g, '<br>'));
     setTxt('txt-historia-2', config.historia.parrafo2 || '');
   }
 
@@ -596,4 +599,8 @@ function setImg(id, src) {
 function setAttr(id, attr, val) {
   const el = document.getElementById(id);
   if (el) el.setAttribute(attr, val);
+}
+function setHtml(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = val;
 }

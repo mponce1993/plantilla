@@ -132,7 +132,7 @@ body {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -140,9 +140,15 @@ body {
   border-bottom: 1px solid var(--color-border);
 }
 
+.meta-left {
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  color: var(--color-muted);
+}
+
 .newspaper-issue-title {
   font-family: var(--font-script);
-  font-size: 28px;
+  font-size: 26px;
   text-transform: none;
   font-weight: 400;
   line-height: 1;
@@ -295,12 +301,29 @@ body {
   }
 }
 
-.story-paragraph {
-  text-align: justify;
-  text-justify: inter-word;
-  margin-bottom: 16px;
+.poem-quote {
+  border-left: 2px solid var(--color-border);
+  padding-left: 16px;
+  margin: 10px 0;
+}
+
+.poem-body {
+  font-family: var(--font-serif);
   font-size: 16.5px;
-  hyphens: auto;
+  line-height: 1.75;
+  font-style: italic;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.poem-author {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--color-muted);
+  text-align: right;
 }
 
 .gallery-stack {
@@ -430,6 +453,23 @@ body {
   bottom: 10px;
   width: 1px;
   background-color: var(--color-border);
+}
+
+.timeline-list.no-line::before {
+  display: none !important;
+}
+
+.itinerary-photo-box {
+  margin-top: 20px;
+}
+
+.photo-itinerary {
+  transform: rotate(-1deg) !important;
+}
+
+.photo-itinerary img {
+  height: 150px;
+  object-fit: cover;
 }
 
 .timeline-item {
@@ -673,9 +713,23 @@ body {
 
 .footer-credit {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: 18px;
   font-style: italic;
-  margin-top: 15px;
+  margin-top: 18px;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.verse-citation {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: inline-block;
+  margin-top: 6px;
 }
 
 /* Floating Actions Bar */

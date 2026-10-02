@@ -1,13 +1,13 @@
 {
-  "novia": "Fabiola Elizabeth Ponce Pumalema",
-  "novio": "Juan Pablo Vallejo Mata",
-  "encabezadoSuperior": "Fabiola Elizabeth & Juan Pablo",
+  "novia": "Fabiola",
+  "novio": "Juan Pablo",
+  "encabezadoSuperior": "FABIOLA & JUAN PABLO",
   "tituloPeriodico": "Noticia de última hora",
   "granTitular": "NOS CASAMOS",
   "fechaTextoHeader": "Sábado, 12 Diciembre 2026",
   "fechaCorazones": "SÁBADO, 12 DICIEMBRE 2026",
   "fechaISO": "2026-12-12T19:00:00",
-  "lugarResumen": "Riobamba, Ecuador",
+  "lugarResumen": "",
   "pases": {
     "etiquetaDefault": "Pase de Invitación",
     "mensajeReservado": "Hemos reservado {{pases}} pases especialmente para ti.",
@@ -18,9 +18,9 @@
     "audioUrl": "./assets/corazon_encantado.mp3"
   },
   "historia": {
-    "titulo": "Nuestra Historia",
-    "parrafo1": "Nos conocimos en el trabajo, sin imaginar que entre, reuniones, tareas y refrigerios apurados encontraríamos algo mucho más importante: el uno al otro... Desde aquel 2 de enero del 2019 hemos reído, madurado, llorado un poquito (pero siempre juntos), y aprendimos que el amor verdadero se construye día a día.",
-    "parrafo2": "Poco a poco empezamos a crecer emocionalmente hasta que \"Llegó el capítulo más emocionante! \"Nos casamos\" y porque en algún momento fuiste cómplice de una risa, un consejo, un abrazo o una anécdota, tú también eres parte de esta historia, es por eso que estás cordialmente invitado/a a celebrar con nosotros este día tan especial."
+    "titulo": "DOS ALMAS",
+    "parrafo1": "Cuando por fin se encuentran dos almas,\nque durante tanto tiempo se han buscado una a otra entre el gentío.\nCuando advierten que son parejas,\nque se comprenden y corresponden.\nEn una palabra, que son semejantes,\nurge entonces para siempre una unión vehemente y pura como ellas mismas,\nuna unión que comienza en la tierra y perdura en el cielo.",
+    "parrafo2": "— Victor Hugo, 1856"
   },
   "ceremonia": {
     "titulo": "Ceremonia Religiosa",
@@ -72,42 +72,15 @@
   },
   "regalos": {
     "titulo": "Sugerencia de Regalo",
-    "mensaje": "¡Que nos acompañes es lo más importante! Y si está en tu disposición realizar una muestra de cariño estaremos muy agradecidos.",
-    "cuentas": [
-      {
-        "titular": "Andrea Olivera Alves",
-        "detalles": [
-          {
-            "etiqueta": "BCP",
-            "valor": "0000 XXXXX 22222"
-          },
-          {
-            "etiqueta": "YAPE",
-            "valor": "000 555 777"
-          }
-        ]
-      },
-      {
-        "titular": "Bruno Mendez Huari",
-        "detalles": [
-          {
-            "etiqueta": "BBVA",
-            "valor": "1111 1111 0123456789"
-          },
-          {
-            "etiqueta": "PLIN",
-            "valor": "000 333 777"
-          }
-        ]
-      }
-    ]
+    "mensaje": "“Nuestro mejor regalo es tu presencia, pero si tu deseo es tener un detalle con nosotros puedes hacerlo dentro de un sobre”",
+    "cuentas": []
   },
   "whatsappRSVP": "5215500000000",
   "imagenes": {
     "portada": "./assets/portada_novios.jpg",
     "historia1": "./assets/historia_1.jpg",
     "historia2": "./assets/historia_2.jpg",
-    "historia3": "./assets/historia_2.jpg",
+    "itinerarioFoto": "./assets/historia_2.jpg",
     "cuentaRegresiva": "./assets/cuenta_regresiva.jpg"
   }
 }

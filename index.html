@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nuestra Boda - Invitación Estilo Periódico</title>
+  <title>Nuestra Boda - Fabiola & Juan Pablo</title>
   <meta name="description" content="Invitación de boda estilo periódico elegante y romántica. ¡Acompáñanos a celebrar nuestro gran día!" />
 
   <!-- Google Fonts: Vintage Newspaper Fonts -->
@@ -37,11 +37,11 @@
 
     <!-- Newspaper Header Meta -->
     <div class="newspaper-meta-bar">
-      <div class="meta-left" id="txt-encabezado-superior">Andrea Mendez & Bruno Olivera</div>
+      <div class="meta-left" id="txt-encabezado-superior">Fabiola & Juan Pablo</div>
       <div class="meta-center">
         <h2 class="newspaper-issue-title" id="txt-titulo-periodico">Noticia de última hora</h2>
       </div>
-      <div class="meta-right" id="txt-fecha-header">Sábado, 9 Agosto 2025</div>
+      <div class="meta-right" id="txt-fecha-header">Sábado, 12 Diciembre 2026</div>
     </div>
 
     <!-- Triple Rule Border -->
@@ -52,43 +52,39 @@
       <h1 class="main-headline" id="txt-gran-titular">NOS CASAMOS</h1>
       
       <div class="hearts-date-bar">
-        <span class="heart-icon">🖤🖤</span>
-        <span class="date-text" id="txt-fecha-corazones">SÁBADO, 9 AGOSTO 2025</span>
-        <span class="heart-icon">🖤🖤</span>
-      </div>
-
-      <!-- Personalized Pass / Ticket Box (visible when link has ?invitado=...&pases=...) -->
-      <div id="personalized-pass-box" class="pass-ticket-box hidden">
-        <div class="pass-stamp">PASE EXCLUSIVO 🎟️</div>
-        <h3 class="pass-guest-name" id="pass-guest-name">Familia Mendoza</h3>
-        <p class="pass-count-text" id="pass-count-text">Hemos reservado <strong>4 pases</strong> especialmente para ti.</p>
+        <span class="date-text" id="txt-fecha-corazones">SÁBADO, 12 DICIEMBRE 2026</span>
       </div>
 
       <div class="rule-divider thin"></div>
 
-      <!-- Main Cover Photo -->
+      <!-- Main Cover Photo (Sin pie de página) -->
       <div class="main-photo-frame">
         <img id="img-portada" src="./assets/portada_novios.jpg" alt="Foto principal de novios" class="newspaper-img" />
-        <p class="photo-caption" id="txt-lugar-resumen">Edición Especial - Celebración de nuestra unión en Ciudad de México</p>
       </div>
     </section>
 
-    <!-- SECTION: Nuestra Historia -->
+    <!-- SECTION: DOS ALMAS -->
     <section class="section-container" id="sec-historia">
       <div class="section-title-wrap">
         <span class="title-line"></span>
-        <h2 class="section-title" id="txt-titulo-historia">Nuestra Historia</h2>
+        <h2 class="section-title" id="txt-titulo-historia">DOS ALMAS</h2>
         <span class="title-line"></span>
       </div>
 
       <div class="story-grid">
         <div class="story-text-col">
-          <p id="txt-historia-1" class="story-paragraph">
-            Nos conocimos en el trabajo, sin imaginar que entre, reuniones, tareas y refrigerios apurados encontraríamos algo mucho más importante: el uno al otro...
-          </p>
-          <p id="txt-historia-2" class="story-paragraph">
-            Poco a poco empezamos a crecer emocionalmente hasta que "Llegó el capítulo más emocionante! "Nos casamos"...
-          </p>
+          <blockquote class="poem-quote">
+            <p id="txt-historia-1" class="poem-body">
+              "Cuando por fin se encuentran dos almas,<br>
+              que durante tanto tiempo se han buscado una a otra entre el gentío.<br>
+              Cuando advierten que son parejas,<br>
+              que se comprenden y corresponden.<br>
+              En una palabra, que son semejantes,<br>
+              urge entonces para siempre una unión vehemente y pura como ellas mismas,<br>
+              una unión que comienza en la tierra y perdura en el cielo."
+            </p>
+            <cite id="txt-historia-2" class="poem-author">Victor Hugo, 1856</cite>
+          </blockquote>
         </div>
         <div class="story-gallery-col">
           <div class="gallery-stack">
@@ -135,11 +131,18 @@
           </div>
         </div>
 
-        <!-- Timeline Column -->
+        <!-- Timeline Column con Foto 5 integrada -->
         <div class="timeline-col">
-          <ul class="timeline-list" id="timeline-container">
+          <ul class="timeline-list no-line" id="timeline-container">
             <!-- Dynamic items populated from JS -->
           </ul>
+          
+          <!-- Foto 5 en el Itinerario -->
+          <div class="itinerary-photo-box">
+            <div class="polaroid-frame photo-itinerary">
+              <img id="img-foto-5" src="./assets/historia_2.jpg" alt="Foto 5 del itinerario" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -162,12 +165,9 @@
       <div class="dress-card">
         <h3 class="dress-subtitle" id="txt-dress-subtitulo">Elegante - Formal</h3>
         <div class="dress-icon-wrap">
-          <!-- Tuxedo & Dress Illustration -->
           <svg class="dress-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-            <!-- Dress -->
             <path d="M 30 30 Q 35 45 32 55 Q 25 80 20 90 L 45 90 Q 40 80 38 55 Q 35 45 40 30 Z" fill="none" stroke="currentColor"/>
             <path d="M 30 30 Q 35 25 40 30" fill="none"/>
-            <!-- Suit -->
             <path d="M 58 30 L 68 30 L 80 40 L 76 90 L 70 90 L 68 55 L 66 90 L 60 90 L 56 40 Z" fill="none" stroke="currentColor"/>
             <path d="M 68 30 L 68 45 L 65 37 L 68 30" fill="currentColor"/>
             <path d="M 68 34 L 70 38 L 68 42 L 66 38 Z" fill="currentColor"/>
@@ -193,11 +193,11 @@
 
       <div class="gift-card">
         <p id="txt-regalos-mensaje" class="gift-message">
-          ¡Que nos acompañes es lo más importante! Y si está en tu disposición realizar una muestra de cariño estaremos muy agradecidos.
+          “Nuestro mejor regalo es tu presencia, pero si tu deseo es tener un detalle con nosotros puedes hacerlo dentro de un sobre”
         </p>
 
-        <div class="bank-accounts-grid" id="bank-accounts-container">
-          <!-- Bank account cards populated dynamically -->
+        <div class="bank-accounts-grid hidden" id="bank-accounts-container">
+          <!-- Oculto para regalo en sobre -->
         </div>
       </div>
     </section>
@@ -235,19 +235,28 @@
         </div>
       </div>
 
-      <!-- Couple Romantic Photo Frame -->
+      <!-- Couple Photo Frame (Sin la barra de fecha) -->
       <div class="countdown-photo-frame">
         <img id="img-cuenta-regresiva" src="./assets/cuenta_regresiva.jpg" alt="Novios noche" />
-        <div class="photo-overlay-tag">
-          🖤 <span id="txt-corazones-foot">SÁBADO, 9 AGOSTO 2025</span> 🖤
-        </div>
       </div>
     </section>
 
-    <!-- Newspaper Footer -->
+    <!-- Personalized Pass / Ticket Box AL FINAL DE LA INVITACIÓN -->
+    <section class="section-container" id="sec-pase-final">
+      <div id="personalized-pass-box" class="pass-ticket-box hidden">
+        <div class="pass-stamp">PASE EXCLUSIVO 🎟️</div>
+        <h3 class="pass-guest-name" id="pass-guest-name">Familia Mendoza</h3>
+        <p class="pass-count-text" id="pass-count-text">Hemos reservado <strong>2 pases</strong> especialmente para ti.</p>
+      </div>
+    </section>
+
+    <!-- Newspaper Footer con Versículo Bíblico final -->
     <footer class="newspaper-footer">
       <div class="rule-divider thick-thin"></div>
-      <p class="footer-credit">Con amor & amor eterno — <span id="txt-footer-novios">Andrea & Bruno</span></p>
+      <p class="footer-credit" id="txt-footer-verso">
+        «Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos»
+        <br><span class="verse-citation">Cantar de los cantares 8:7</span>
+      </p>
     </footer>
 
   </main>
@@ -394,12 +403,12 @@
         <!-- Tab Historia -->
         <div id="tab-historia" class="tab-pane">
           <div class="form-group">
-            <label>Párrafo 1:</label>
+            <label>Texto Dos Almas:</label>
             <textarea id="edit-historia-1" rows="4"></textarea>
           </div>
           <div class="form-group">
-            <label>Párrafo 2:</label>
-            <textarea id="edit-historia-2" rows="4"></textarea>
+            <label>Autor / Firma:</label>
+            <textarea id="edit-historia-2" rows="2"></textarea>
           </div>
         </div>
 
