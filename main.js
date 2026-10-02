@@ -1,4 +1,4 @@
-﻿// main.js - Plantilla de Invitación de Boda Estilo Periódico
+// main.js - Plantilla de Invitación de Boda Estilo Periódico
 
 let appConfig = null;
 let timerInterval = null;
@@ -663,7 +663,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
     <div class="top-border"></div>
     <div class="content">
       <div class="header">
-        <p class="subtitle">Tenemos el honor de invitarles a nuestra boda</p>
+        <p class="subtitle" style="line-height: 1.6;">Tenemos el honor de invitarles a<br>nuestra boda</p>
         <h1>${novios}</h1>
         
       </div>
