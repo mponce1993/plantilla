@@ -359,21 +359,25 @@ body {
 
 /* Program Grid */
 .program-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 30px;
-}
-
-@media (min-width: 540px) {
-  .program-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 .venue-cards-col {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+@media (min-width: 540px) {
+  .venue-cards-col {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .venue-card {
+    flex: 1;
+  }
 }
 
 .venue-card {
@@ -466,13 +470,14 @@ body {
 .photo-itinerary {
   transform: rotate(-1deg) !important;
   width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .photo-itinerary img {
   width: 100%;
   height: auto;
-  max-height: 450px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .timeline-item {
