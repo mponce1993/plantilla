@@ -91,21 +91,13 @@ function checkUrlGuestParameters() {
 // Load config.json with fallback to localStorage draft
 async function loadConfiguration() {
   try {
-    const response = await fetch('./config.json');
+    const timestamp = new Date().getTime();
+    const response = await fetch(`./config.json?v=${timestamp}`);
     const masterConfig = await response.json();
     
-    const localDraft = localStorage.getItem('wedding_config_draft');
-    if (localDraft) {
-      const parsedDraft = JSON.parse(localDraft);
-      if (parsedDraft.novia?.includes('Andrea') || parsedDraft.novia?.includes('Fabiola Elizabeth')) {
-        localStorage.removeItem('wedding_config_draft');
-        appConfig = masterConfig;
-      } else {
-        appConfig = parsedDraft;
-      }
-    } else {
-      appConfig = masterConfig;
-    }
+    // Always use master config to prevent caching/draft issues
+    localStorage.removeItem('wedding_config_draft');
+    appConfig = masterConfig;
   } catch (error) {
     console.error('Error cargando config.json:', error);
   }

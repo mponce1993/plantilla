@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nuestra Boda - Fabiola & Juan Pablo</title>
-  <meta name="description" content="Invitación de boda estilo periódico elegante y romántica. ¡Acompáñanos a celebrar nuestro gran día!" />
+  <meta name="description"
+    content="Invitación de boda estilo periódico elegante y romántica. ¡Acompáñanos a celebrar nuestro gran día!" />
 
   <!-- Google Fonts: Vintage Newspaper Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css" />
 
@@ -17,6 +21,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
+
 <body>
 
   <!-- Top Sticky Music Player Bar -->
@@ -24,8 +29,12 @@
     <div class="music-container">
       <span class="music-label">Dale play para escuchar nuestra canción</span>
       <button id="btn-play-audio" class="music-btn" aria-label="Reproducir música">
-        <svg id="icon-play" class="icon-music" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-        <svg id="icon-pause" class="icon-music hidden" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <svg id="icon-play" class="icon-music" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M8 5v14l11-7z" />
+        </svg>
+        <svg id="icon-pause" class="icon-music hidden" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+        </svg>
       </button>
       <div class="music-equalizer hidden" id="equalizer">
         <span></span><span></span><span></span>
@@ -54,7 +63,7 @@
     <!-- Main Front-Page Title -->
     <section class="hero-section">
       <h1 class="main-headline" id="txt-gran-titular">NOS CASAMOS</h1>
-      
+
       <div class="hearts-date-bar">
         <span class="date-text" id="txt-fecha-corazones">SÁBADO, 12 DICIEMBRE 2026</span>
       </div>
@@ -128,9 +137,9 @@
           <div class="venue-card">
             <h3 class="venue-title" id="txt-ceremonia-titulo">Ceremonia Religiosa</h3>
             <div class="card-rule"></div>
-            <p class="venue-time" id="txt-ceremonia-hora">Hora 06:00 pm</p>
-            <p class="venue-place" id="txt-ceremonia-lugar">"Templo de San Francisco"</p>
-            <p class="venue-city" id="txt-ceremonia-ciudad">Ciudad de México</p>
+            <p class="venue-time" id="txt-ceremonia-hora">Hora 04:30 pm</p>
+            <p class="venue-place" id="txt-ceremonia-lugar">Iglesia "La Dolorosa"</p>
+            <p class="venue-city" id="txt-ceremonia-ciudad">Riobamba, Ecuador</p>
             <a id="btn-ceremonia-mapa" href="#" target="_blank" class="btn-map">Ver mapa</a>
           </div>
 
@@ -138,20 +147,15 @@
           <div class="venue-card">
             <h3 class="venue-title" id="txt-recepcion-titulo">Recepción</h3>
             <div class="card-rule"></div>
-            <p class="venue-time" id="txt-recepcion-hora">Hora 08:00 pm</p>
-            <p class="venue-place" id="txt-recepcion-lugar">"MOVA Eventos"</p>
-            <p class="venue-city" id="txt-recepcion-ciudad">Miguel Hidalgo, CDMX</p>
+            <p class="venue-time" id="txt-recepcion-hora">Hora 07:00 pm</p>
+            <p class="venue-place" id="txt-recepcion-lugar">Hacienda "Las Manolas"</p>
+            <p class="venue-city" id="txt-recepcion-ciudad">Riobamba, Ecuador</p>
             <a id="btn-recepcion-mapa" href="#" target="_blank" class="btn-map">Ver mapa</a>
           </div>
         </div>
       </div>
 
-      <!-- Adults Only Callout Box -->
-      <div class="adults-only-box">
-        <p id="txt-nota-ninos">
-          Amamos a los niños, pero creemos que esta noche se merecen disfrutar solos como pareja, por eso en esta ocasión será solo para adultos.
-        </p>
-      </div>
+
     </section>
 
     <!-- SECTION: Dress Code -->
@@ -166,11 +170,13 @@
         <h3 class="dress-subtitle" id="txt-dress-subtitulo">Elegante - Formal</h3>
         <div class="dress-icon-wrap">
           <svg class="dress-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M 30 30 Q 35 45 32 55 Q 25 80 20 90 L 45 90 Q 40 80 38 55 Q 35 45 40 30 Z" fill="none" stroke="currentColor"/>
-            <path d="M 30 30 Q 35 25 40 30" fill="none"/>
-            <path d="M 58 30 L 68 30 L 80 40 L 76 90 L 70 90 L 68 55 L 66 90 L 60 90 L 56 40 Z" fill="none" stroke="currentColor"/>
-            <path d="M 68 30 L 68 45 L 65 37 L 68 30" fill="currentColor"/>
-            <path d="M 68 34 L 70 38 L 68 42 L 66 38 Z" fill="currentColor"/>
+            <path d="M 30 30 Q 35 45 32 55 Q 25 80 20 90 L 45 90 Q 40 80 38 55 Q 35 45 40 30 Z" fill="none"
+              stroke="currentColor" />
+            <path d="M 30 30 Q 35 25 40 30" fill="none" />
+            <path d="M 58 30 L 68 30 L 80 40 L 76 90 L 70 90 L 68 55 L 66 90 L 60 90 L 56 40 Z" fill="none"
+              stroke="currentColor" />
+            <path d="M 68 30 L 68 45 L 65 37 L 68 30" fill="currentColor" />
+            <path d="M 68 34 L 70 38 L 68 42 L 66 38 Z" fill="currentColor" />
           </svg>
         </div>
 
@@ -187,13 +193,14 @@
     <section class="section-container" id="sec-regalos">
       <div class="section-title-wrap">
         <span class="title-line"></span>
-        <h2 class="section-title" id="txt-regalos-titulo">Sugerencia de Regalo</h2>
+        <h2 class="section-title" id="txt-regalos-titulo">“Nuestro mejor regalo es tu presencia, pero si tu deseo es
+          tener un detalle con nosotros puedes hacerlo dentro de un sobre”</h2>
         <span class="title-line"></span>
       </div>
 
       <div class="gift-card">
         <p id="txt-regalos-mensaje" class="gift-message">
-          “Nuestro mejor regalo es tu presencia, pero si tu deseo es tener un detalle con nosotros puedes hacerlo dentro de un sobre”
+
         </p>
 
         <div class="bank-accounts-grid hidden" id="bank-accounts-container">
@@ -246,7 +253,8 @@
       <div id="personalized-pass-box" class="pass-ticket-box hidden">
         <div class="pass-stamp">PASE EXCLUSIVO 🎟️</div>
         <h3 class="pass-guest-name" id="pass-guest-name">Familia Mendoza</h3>
-        <p class="pass-count-text" id="pass-count-text">Hemos reservado <strong>2 pases</strong> especialmente para ti.</p>
+        <p class="pass-count-text" id="pass-count-text">Hemos reservado <strong>2 pases</strong> especialmente para ti.
+        </p>
         <button id="btn-download-pass-pdf" class="btn-pdf-pass">📄 Descargar Pase en PDF</button>
       </div>
     </section>
@@ -271,7 +279,7 @@
           <span>EDICIÓN ESPECIAL</span>
         </div>
         <div class="pdf-divider-double"></div>
-        
+
         <h1 class="pdf-headline">NOS CASAMOS</h1>
         <p class="pdf-subheadline">INVITACIÓN DE BODA INTERACTIVA</p>
         <div class="pdf-divider-single"></div>
@@ -284,7 +292,8 @@
 
         <div class="pdf-body-text">
           <p>Nos complace invitarte a celebrar la unión de nuestras vidas.</p>
-          <p class="pdf-highlight">Escanea el código QR o presiona el botón interactivo para escuchar nuestra canción de boda y ver todos los detalles en vivo:</p>
+          <p class="pdf-highlight">Escanea el código QR o presiona el botón interactivo para escuchar nuestra canción de
+            boda y ver todos los detalles en vivo:</p>
         </div>
 
         <div class="pdf-qr-section">
@@ -306,11 +315,16 @@
   <!-- Sticky Bottom Action Floating Buttons -->
   <div class="floating-actions">
     <button id="btn-open-rsvp" class="action-btn btn-rsvp">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M.457 19.141l.034-.134.012-.045a8.9 8.9 0 011.666-3.214C1.196 14.331.671 12.695.671 10.963c0-5.111 4.67-9.27 10.414-9.27 5.745 0 10.415 4.159 10.415 9.27 0 5.112-4.67 9.271-10.415 9.271-1.637 0-3.208-.344-4.63-1.002a9.7 9.7 0 01-4.048.887 2.1 2.1 0 01-1.95-1.018z"/></svg>
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M.457 19.141l.034-.134.012-.045a8.9 8.9 0 011.666-3.214C1.196 14.331.671 12.695.671 10.963c0-5.111 4.67-9.27 10.414-9.27 5.745 0 10.415 4.159 10.415 9.27 0 5.112-4.67 9.271-10.415 9.271-1.637 0-3.208-.344-4.63-1.002a9.7 9.7 0 01-4.048.887 2.1 2.1 0 01-1.95-1.018z" />
+      </svg>
       Confirmar Asistencia
     </button>
     <button id="btn-open-editor" class="action-btn btn-editor hidden" title="Personalizar datos de config.json">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+      </svg>
       Editar Config
     </button>
   </div>
@@ -321,7 +335,7 @@
       <button class="modal-close" id="btn-close-rsvp">&times;</button>
       <h3 class="modal-title">Confirmar Asistencia</h3>
       <p class="modal-subtitle">Envía tu confirmación directamente a los novios vía WhatsApp</p>
-      
+
       <form id="form-rsvp" class="modal-form">
         <div class="form-group">
           <label for="rsvp-nombre">Nombre completo:</label>
@@ -352,7 +366,8 @@
     <div class="modal-card modal-large">
       <button class="modal-close" id="btn-close-editor">&times;</button>
       <h3 class="modal-title">⚙️ Editor de Configuración (`config.json`)</h3>
-      <p class="modal-subtitle">Modifica los datos en vivo sin base de datos ni servidor. Presiona <strong>Descargar config.json</strong> para guardar tus cambios en el archivo estático.</p>
+      <p class="modal-subtitle">Modifica los datos en vivo sin base de datos ni servidor. Presiona <strong>Descargar
+          config.json</strong> para guardar tus cambios en el archivo estático.</p>
 
       <div class="editor-tabs">
         <button class="tab-btn active" data-tab="tab-asistentes">📋 Lista de Asistentes Registrados</button>
@@ -389,7 +404,9 @@
                 </tr>
               </thead>
               <tbody id="asistentes-tbody">
-                <tr><td colspan="5" class="empty-table">Cargando registros...</td></tr>
+                <tr>
+                  <td colspan="5" class="empty-table">Cargando registros...</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -397,7 +414,8 @@
           <div class="editor-actions">
             <button id="btn-export-csv" class="btn-editor-action preview">📊 Descargar Excel / CSV</button>
             <button id="btn-export-json" class="btn-editor-action download">📥 Descargar JSON</button>
-            <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️ Limpiar Lista</button>
+            <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️
+              Limpiar Lista</button>
           </div>
         </div>
 
@@ -489,8 +507,9 @@
 
         <!-- Tab Generador de Enlaces Personalizados & PDF -->
         <div id="tab-generador" class="tab-pane">
-          <p class="small-info">Crea un enlace personalizado y descarga una tarjeta PDF interactiva para cada invitado:</p>
-          
+          <p class="small-info">Crea un enlace personalizado y descarga una tarjeta PDF interactiva para cada invitado:
+          </p>
+
           <div class="form-row">
             <div class="form-group">
               <label for="gen-nombre">Nombre del Invitado / Familia:</label>
@@ -504,7 +523,8 @@
 
           <div class="form-group">
             <label>Enlace Personalizado Generado:</label>
-            <input type="text" id="gen-link-result" readonly placeholder="https://tuboda.com/?invitado=Familia+Mendoza&pases=2" />
+            <input type="text" id="gen-link-result" readonly
+              placeholder="https://tuboda.com/?invitado=Familia+Mendoza&pases=2" />
           </div>
 
           <div class="form-group">
@@ -518,7 +538,9 @@
           </div>
 
           <div class="form-row" style="margin-top: 10px;">
-            <button id="btn-generate-pdf-guest" class="btn-editor-action" style="background:#8b0000; color:#fff; grid-column: span 2; padding: 14px;">📄 Descargar Tarjeta PDF Interactiva con Música (QR + Link)</button>
+            <button id="btn-generate-pdf-guest" class="btn-editor-action"
+              style="background:#8b0000; color:#fff; grid-column: span 2; padding: 14px;">📄 Descargar Tarjeta PDF
+              Interactiva con Música (QR + Link)</button>
           </div>
         </div>
       </div>
@@ -535,4 +557,5 @@
 
   <script type="module" src="./main.js"></script>
 </body>
+
 </html>
