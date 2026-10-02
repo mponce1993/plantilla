@@ -363,6 +363,19 @@ function setupEventListeners() {
     saveEditorToConfig();
     downloadJsonFile(appConfig, 'config.json');
   });
+
+  document.getElementById('btn-generate-pdf-guest')?.addEventListener('click', () => {
+    generateGuestPDF();
+  });
+
+  document.getElementById('btn-download-pass-pdf')?.addEventListener('click', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nombre = urlParams.get('invitado') || urlParams.get('nombre') || document.getElementById('pass-guest-name')?.innerText || 'Invitado Especial';
+    const pasesText = document.getElementById('pass-count-text')?.innerText || '';
+    const match = pasesText.match(/(\d+)/);
+    const pases = match ? match[1] : '2';
+    generateGuestPDF(nombre, pases);
+  });
 }
 
 // Populate Editor Fields from appConfig
@@ -578,6 +591,69 @@ function setupLinkGenerator() {
   });
 
   updateGenerator();
+}
+
+// Generate and Download Interactive PDF Card for Guest
+async function generateGuestPDF(nombreGuest, pasesGuest) {
+  const nombre = nombreGuest || document.getElementById('gen-nombre')?.value?.trim() || 'Familia Mendoza';
+  const pases = pasesGuest || document.getElementById('gen-pases')?.value || '2';
+
+  const baseUrl = `${window.location.origin}${window.location.pathname}`;
+  const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
+
+  showToast('⏳ Generando tarjeta PDF interactiva...');
+
+  // Update PDF Card Template elements
+  const elNovios = document.getElementById('pdf-novios-names');
+  const elGuest = document.getElementById('pdf-guest-name');
+  const elPases = document.getElementById('pdf-guest-pases');
+  const elQrBox = document.getElementById('pdf-qrcode-box');
+  const elLinkBtn = document.getElementById('pdf-btn-link');
+
+  if (elNovios && appConfig) elNovios.innerText = `${appConfig.novia?.toUpperCase()} & ${appConfig.novio?.toUpperCase()}`;
+  if (elGuest) elGuest.innerText = nombre;
+  if (elPases) elPases.innerText = `Hemos reservado ${pases} ${pases == 1 ? 'pase' : 'pases'} especialmente para ti.`;
+  if (elLinkBtn) elLinkBtn.setAttribute('href', fullUrl);
+
+  // Generate QR code into qrcode box
+  if (elQrBox) {
+    elQrBox.innerHTML = '';
+    if (window.QRCode) {
+      new QRCode(elQrBox, {
+        text: fullUrl,
+        width: 130,
+        height: 130,
+        colorDark: "#1a1a1a",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+  }
+
+  // Small delay for QR render
+  await new Promise(r => setTimeout(r, 350));
+
+  const element = document.getElementById('pdf-card-template');
+  if (!element || !window.html2pdf) {
+    showToast('Error cargando generador de PDF');
+    return;
+  }
+
+  const opt = {
+    margin: [5, 5, 5, 5],
+    filename: `Invitacion_Boda_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' }
+  };
+
+  try {
+    await html2pdf().set(opt).from(element).save();
+    showToast('🎉 ¡Tarjeta PDF interactiva descargada!');
+  } catch (err) {
+    console.error('Error al generar PDF:', err);
+    showToast('Error al descargar el PDF');
+  }
 }
 
 // Utility DOM Helpers

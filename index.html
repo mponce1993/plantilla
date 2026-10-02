@@ -12,6 +12,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css" />
+
+  <!-- Libraries for Interactive PDF & QR Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -247,6 +251,7 @@
         <div class="pass-stamp">PASE EXCLUSIVO 🎟️</div>
         <h3 class="pass-guest-name" id="pass-guest-name">Familia Mendoza</h3>
         <p class="pass-count-text" id="pass-count-text">Hemos reservado <strong>2 pases</strong> especialmente para ti.</p>
+        <button id="btn-download-pass-pdf" class="btn-pdf-pass">📄 Descargar Pase en PDF</button>
       </div>
     </section>
 
@@ -260,6 +265,47 @@
     </footer>
 
   </main>
+
+  <!-- Hidden PDF Card Printable Template -->
+  <div id="pdf-card-wrapper" style="position: absolute; left: -9999px; top: -9999px;">
+    <div id="pdf-card-template" class="pdf-card-container">
+      <div class="pdf-card-inner">
+        <div class="pdf-meta-bar">
+          <span id="pdf-novios-names">FABIOLA & JUAN PABLO</span>
+          <span>EDICIÓN ESPECIAL</span>
+        </div>
+        <div class="pdf-divider-double"></div>
+        
+        <h1 class="pdf-headline">NOS CASAMOS</h1>
+        <p class="pdf-subheadline">INVITACIÓN DE BODA INTERACTIVA</p>
+        <div class="pdf-divider-single"></div>
+
+        <div class="pdf-pass-box">
+          <div class="pdf-pass-stamp">PASE EXCLUSIVO 🎟️</div>
+          <h2 id="pdf-guest-name" class="pdf-guest-name">Familia Mendoza</h2>
+          <p id="pdf-guest-pases" class="pdf-guest-pases">Hemos reservado 2 pases especialmente para ti.</p>
+        </div>
+
+        <div class="pdf-body-text">
+          <p>Nos complace invitarte a celebrar la unión de nuestras vidas.</p>
+          <p class="pdf-highlight">Escanea el código QR o presiona el botón interactivo para escuchar nuestra canción de boda y ver todos los detalles en vivo:</p>
+        </div>
+
+        <div class="pdf-qr-section">
+          <div id="pdf-qrcode-box" class="pdf-qrcode-box"></div>
+          <a id="pdf-btn-link" href="#" target="_blank" class="pdf-action-btn">
+            ▶️ ESCUCHAR CANCIÓN Y ABRIR INVITACIÓN
+          </a>
+        </div>
+
+        <div class="pdf-divider-double" style="margin-top: 25px;"></div>
+        <p class="pdf-footer-verse">
+          «Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos»<br>
+          <small>Cantar de los cantares 8:7</small>
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- Sticky Bottom Action Floating Buttons -->
   <div class="floating-actions">
@@ -314,7 +360,7 @@
 
       <div class="editor-tabs">
         <button class="tab-btn active" data-tab="tab-asistentes">📋 Lista de Asistentes Registrados</button>
-        <button class="tab-btn" data-tab="tab-generador">✉️ Generar Enlaces</button>
+        <button class="tab-btn" data-tab="tab-generador">✉️ Generar Enlaces & PDF</button>
         <button class="tab-btn" data-tab="tab-general">General</button>
         <button class="tab-btn" data-tab="tab-historia">Historia</button>
         <button class="tab-btn" data-tab="tab-lugares">Lugares & Itinerario</button>
@@ -358,6 +404,7 @@
             <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️ Limpiar Lista</button>
           </div>
         </div>
+
         <!-- Tab General -->
         <div id="tab-general" class="tab-pane">
           <div class="form-row">
@@ -444,9 +491,9 @@
           </div>
         </div>
 
-        <!-- Tab Generador de Enlaces Personalizados -->
+        <!-- Tab Generador de Enlaces Personalizados & PDF -->
         <div id="tab-generador" class="tab-pane">
-          <p class="small-info">Crea un enlace personalizado para cada invitado con su nombre y cantidad de pases asignados:</p>
+          <p class="small-info">Crea un enlace personalizado y descarga una tarjeta PDF interactiva para cada invitado:</p>
           
           <div class="form-row">
             <div class="form-group">
@@ -466,12 +513,16 @@
 
           <div class="form-group">
             <label>Mensaje listo para enviar por WhatsApp:</label>
-            <textarea id="gen-msg-result" rows="4" readonly></textarea>
+            <textarea id="gen-msg-result" rows="3" readonly></textarea>
           </div>
 
           <div class="form-row">
             <button id="btn-copy-guest-link" class="btn-editor-action preview">Copiar Solo Enlace 🔗</button>
             <button id="btn-copy-guest-msg" class="btn-editor-action download">Copiar Mensaje Completo 📲</button>
+          </div>
+
+          <div class="form-row" style="margin-top: 10px;">
+            <button id="btn-generate-pdf-guest" class="btn-editor-action" style="background:#8b0000; color:#fff; grid-column: span 2; padding: 14px;">📄 Descargar Tarjeta PDF Interactiva con Música (QR + Link)</button>
           </div>
         </div>
       </div>
