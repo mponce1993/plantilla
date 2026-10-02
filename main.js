@@ -609,69 +609,123 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const baseUrl = `${window.location.origin}${window.location.pathname}`;
   const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
 
-  if (!window.html2pdf) {
-    // Fallback: open invitation in new tab
-    window.open(fullUrl, '_blank');
-    return;
-  }
+  const novios = appConfig ? `${(appConfig.novia||'FABIOLA').toUpperCase()} &amp; ${(appConfig.novio||'JUAN PABLO').toUpperCase()}` : 'FABIOLA &amp; JUAN PABLO';
+  const fecha = (appConfig?.fechaCorazones || appConfig?.fechaTextoHeader || 'SABADO, 9 DE AGOSTO 2025').toUpperCase();
+  const cerLugar = (appConfig?.ceremonia?.lugar || 'Iglesia La Dolorosa').replace(/"/g, '');
+  const cerHora = appConfig?.ceremonia?.hora || '04:30 pm';
+  const recLugar = (appConfig?.recepcion?.lugar || 'Hacienda Las Manolas').replace(/"/g, '');
+  const recHora = appConfig?.recepcion?.hora || '07:00 pm';
 
-  showToast('Generando PDF...');
-
-  // Fill template fields
-  const setId = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
-  const setAttrEl = (id, attr, val) => { const el = document.getElementById(id); if (el) el.setAttribute(attr, val); };
-
-  if (appConfig) {
-    setId('pdf-novios-names', `${(appConfig.novia || 'FABIOLA').toUpperCase()} & ${(appConfig.novio || 'JUAN PABLO').toUpperCase()}`);
-    setId('pdf-fecha', (appConfig.fechaCorazones || appConfig.fechaTextoHeader || '').toUpperCase());
-    setId('pdf-ceremonia-lugar', (appConfig.ceremonia?.lugar || '').replace(/"/g, ''));
-    setId('pdf-ceremonia-hora', appConfig.ceremonia?.hora || '');
-    setId('pdf-recepcion-lugar', (appConfig.recepcion?.lugar || '').replace(/"/g, ''));
-    setId('pdf-recepcion-hora', appConfig.recepcion?.hora || '');
-  }
-  setId('pdf-guest-name', nombre);
-  setId('pdf-guest-pases', `${pases} pase${pases == 1 ? '' : 's'} reservado${pases == 1 ? '' : 's'} especialmente para ti`);
-  setAttrEl('pdf-btn-link', 'href', fullUrl);
-  setId('pdf-url-text', fullUrl);
-
-  // Generate QR code
-  const qrBox = document.getElementById('pdf-qrcode-box');
-  if (qrBox) {
-    qrBox.innerHTML = '';
-    if (window.QRCode) {
-      new QRCode(qrBox, { text: fullUrl, width: 110, height: 110, colorDark: '#6b2737', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+  const htmlContent = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitacion - ${nombre}</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f0ece4; display: flex; justify-content: center; align-items: flex-start; padding: 20px; font-family: Georgia, serif; }
+    .card { width: 148mm; background: #fdf8f2; color: #2c2c2c; }
+    .bar-wine { background: #6b2737; height: 14px; }
+    .bar-gold { background: #d4a843; height: 4px; }
+    .content { padding: 28px 32px; }
+    .header { text-align: center; margin-bottom: 18px; }
+    .header .subtitle { font-size: 10px; letter-spacing: 4px; color: #6b2737; text-transform: uppercase; margin-bottom: 8px; }
+    .header h1 { font-size: 28px; font-weight: bold; color: #2c2c2c; letter-spacing: 3px; margin-bottom: 6px; }
+    .header .italic { font-size: 14px; color: #6b2737; font-style: italic; }
+    .fecha-bar { border-top: 2px solid #d4a843; border-bottom: 2px solid #d4a843; padding: 10px 0; text-align: center; margin-bottom: 20px; }
+    .fecha-bar p { font-size: 13px; font-weight: bold; letter-spacing: 3px; color: #2c2c2c; }
+    .venues { display: flex; gap: 12px; margin-bottom: 20px; }
+    .venue-box { flex: 1; background: #fff; border: 1px solid #e8dcc8; padding: 12px; text-align: center; }
+    .venue-box .label { font-size: 8px; letter-spacing: 3px; color: #6b2737; text-transform: uppercase; margin-bottom: 6px; }
+    .venue-box .place { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
+    .venue-box .time { font-size: 11px; color: #666; }
+    .pass-box { background: #6b2737; color: #fff; padding: 16px 20px; text-align: center; margin-bottom: 20px; }
+    .pass-box .pass-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.8; margin-bottom: 6px; }
+    .pass-box h2 { font-size: 22px; font-weight: bold; color: #d4a843; margin-bottom: 6px; }
+    .pass-box p { font-size: 12px; opacity: 0.9; }
+    .qr-section { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
+    .qr-wrap { text-align: center; flex-shrink: 0; }
+    .qr-wrap p { font-size: 9px; color: #999; margin-top: 4px; }
+    .link-section { flex: 1; }
+    .link-section p { font-size: 12px; color: #444; margin-bottom: 12px; font-style: italic; }
+    .link-btn { display: block; background: #6b2737; color: #fff; padding: 12px; text-decoration: none; font-size: 13px; letter-spacing: 1px; font-family: Arial, sans-serif; font-weight: bold; text-align: center; }
+    .url-text { font-size: 8px; color: #aaa; word-break: break-all; margin-top: 6px; font-family: Arial, sans-serif; }
+    .footer-verse { border-top: 1px solid #d4a843; padding-top: 12px; text-align: center; }
+    .footer-verse p { font-size: 10px; font-style: italic; color: #666; margin-bottom: 4px; }
+    .footer-verse small { font-size: 9px; color: #999; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .card { width: 100%; }
+      .no-print { display: none; }
     }
-  }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="bar-wine"></div>
+    <div class="bar-gold"></div>
+    <div class="content">
+      <div class="header">
+        <p class="subtitle">Tenemos el honor de invitarles a</p>
+        <h1>${novios}</h1>
+        <p class="italic">Nos casamos</p>
+      </div>
+      <div class="fecha-bar"><p>${fecha}</p></div>
+      <div class="venues">
+        <div class="venue-box">
+          <p class="label">Ceremonia</p>
+          <p class="place">${cerLugar}</p>
+          <p class="time">${cerHora}</p>
+        </div>
+        <div class="venue-box">
+          <p class="label">Recepcion</p>
+          <p class="place">${recLugar}</p>
+          <p class="time">${recHora}</p>
+        </div>
+      </div>
+      <div class="pass-box">
+        <p class="pass-label">Pase Exclusivo</p>
+        <h2>${nombre}</h2>
+        <p>${pases} pase${pases==1?'':'s'} reservado${pases==1?'':'s'} especialmente para ti</p>
+      </div>
+      <div class="qr-section">
+        <div class="qr-wrap">
+          <div id="qrcode"></div>
+          <p>Escanea para abrir</p>
+        </div>
+        <div class="link-section">
+          <p>Toca el enlace para ver la invitacion completa con nuestra cancion</p>
+          <a class="link-btn" href="${fullUrl}">ABRIR INVITACION INTERACTIVA</a>
+          <p class="url-text">${fullUrl}</p>
+        </div>
+      </div>
+      <div class="footer-verse">
+        <p>Las muchas aguas no podran apagar el amor, ni lo ahogaran los rios</p>
+        <small>Cantar de los Cantares 8:7</small>
+      </div>
+    </div>
+    <div class="bar-gold"></div>
+    <div class="bar-wine"></div>
+  </div>
+  <script>
+    new QRCode(document.getElementById('qrcode'), {
+      text: '${fullUrl}', width: 110, height: 110,
+      colorDark: '#6b2737', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    setTimeout(() => window.print(), 800);
+  <\/script>
+</body>
+</html>`;
 
-  await new Promise(r => setTimeout(r, 400));
-
-  const wrapper = document.getElementById('pdf-card-wrapper');
-  const element = document.getElementById('pdf-card-template');
-  if (!element || !wrapper) { showToast('Error: template no encontrado'); return; }
-
-  // Make visible for html2canvas
-  wrapper.style.left = '0px';
-  wrapper.style.top = '0px';
-  wrapper.style.zIndex = '999999';
-  await new Promise(r => setTimeout(r, 150));
-
-  const opt = {
-    margin: 0,
-    filename: `Invitacion_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#fdf8f2' },
-    jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' }
-  };
-
-  try {
-    await html2pdf().set(opt).from(element).save();
-    showToast('PDF descargado!');
-  } catch (err) {
-    console.error(err);
-    showToast('Error al generar PDF');
-  } finally {
-    wrapper.style.left = '-9999px';
-    wrapper.style.zIndex = '-1';
+  const printWin = window.open('', '_blank', 'width=700,height=900');
+  if (printWin) {
+    printWin.document.write(htmlContent);
+    printWin.document.close();
+    showToast('Ventana de PDF abierta - guarda como PDF');
+  } else {
+    showToast('Permite ventanas emergentes para generar el PDF');
   }
 }
 
