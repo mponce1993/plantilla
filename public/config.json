@@ -25,14 +25,14 @@
   "ceremonia": {
     "titulo": "Ceremonia Religiosa",
     "hora": "Hora 04:30 pm",
-    "lugar": "\"Iglesia La Dolorosa\"",
+    "lugar": "\"Iglesia “La Dolorosa\"",
     "ciudad": "Ciudad de Riobamba",
     "mapaUrl": "https://share.google/926Hm5eUJFZj9MR5D"
   },
   "recepcion": {
     "titulo": "Recepción",
     "hora": "Hora 07:00 pm",
-    "lugar": "\"Hacienda Las Manolas\"",
+    "lugar": "\"Hacienda “Las Manolas”\"",
     "ciudad": "Riobamba, Ecuador",
     "mapaUrl": "https://www.google.com/travel/search?ts=CAESCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAKGA0SBwjqDxAKGA4YATICEAAqBwoFOgNVU0Q&qs=CAEyFENnc0ltZmJQakxMT2lKVGhBUkFCOAhCCRGaDIr4nNdCpkIJEYP8-O6FmUto&utm_campaign=sharing&utm_medium=link_btn&utm_source=htls"
   },
@@ -61,8 +61,8 @@
     "notaColor": "(Se reserva el color blanco para la Novia)"
   },
   "regalos": {
-    "titulo": "Sugerencia de Regalo",
-    "mensaje": "“Nuestro mejor regalo es tu presencia, pero si tu deseo es tener un detalle con nosotros puedes hacerlo dentro de un sobre”",
+    "titulo": "“Nuestro mejor regalo es tu presencia, pero si tu deseo es tener un detalle con nosotros puedes hacerlo dentro de un sobre”",
+    "mensaje": "",
     "cuentas": []
   },
   "whatsappRSVP": "5215500000000",
