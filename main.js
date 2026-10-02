@@ -663,7 +663,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
     <div class="top-border"></div>
     <div class="content">
       <div class="header">
-        <p class="subtitle">Tenemos el honor de invitarles a</p>
+        <p class="subtitle">Tenemos el honor de invitarles a nuestra boda</p>
         <h1>${novios}</h1>
         <p class="italic">Nos casamos</p>
       </div>
