@@ -658,6 +658,15 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
 
   element.insertBefore(audioBanner, element.firstChild);
 
+  // Temporarily bring the wrapper into view so html2canvas can capture it perfectly
+  const wrapper = document.getElementById('pdf-card-wrapper');
+  if (wrapper) {
+    wrapper.style.left = '0px';
+    wrapper.style.top = '0px';
+    wrapper.style.zIndex = '999999';
+    wrapper.style.backgroundColor = '#fff';
+  }
+
   const opt = {
     margin: [5, 5, 5, 5],
     filename: `Invitacion_Boda_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
@@ -673,6 +682,11 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
     console.error('Error al generar PDF:', err);
     showToast('Error al descargar el PDF');
   } finally {
+    // Hide wrapper again
+    if (wrapper) {
+      wrapper.style.left = '-9999px';
+      wrapper.style.top = '-9999px';
+    }
     // Remove the temporary audio banner after generation
     const banner = document.getElementById('temp-pdf-audio-banner');
     if (banner) banner.remove();
