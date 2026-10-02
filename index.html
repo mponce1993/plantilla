@@ -270,299 +270,319 @@
 
   <!-- PDF Invitation Card Template -->
   <div id="pdf-card-wrapper" style="position:fixed;left:-9999px;top:0;width:550px;background:#fff;z-index:-1;">
-    <div id="pdf-card-template" style="width:550px;background:#fdf8f2;font-family:Georgia,serif;color:#2c2c2c;padding:0;box-sizing:border-box;">
+    <div id="pdf-card-template"
+      style="width:550px;background:#fdf8f2;font-family:Georgia,serif;color:#2c2c2c;padding:0;box-sizing:border-box;">
       <div style="background:#6b2737;height:14px;width:100%;"></div>
       <div style="background:#d4a843;height:4px;width:100%;"></div>
       <div style="padding:28px 36px;">
         <div style="text-align:center;margin-bottom:18px;">
-          <p style="font-size:11px;letter-spacing:4px;color:#6b2737;text-transform:uppercase;margin:0 0 8px 0;">Tenemos el honor de invitarles a</p>
-          <h1 id="pdf-novios-names" style="font-size:30px;font-weight:bold;color:#2c2c2c;margin:0;letter-spacing:3px;">FABIOLA &amp; JUAN PABLO</h1>
-          <p style="font-size:15px;color:#6b2737;font-style:italic;margin:6px 0 0 0;">Nos casamos</p>
-        </div>
-        <div style="border-top:2px solid #d4a843;border-bottom:2px solid #d4a843;padding:10px 0;text-align:center;margin-bottom:20px;">
-          <p id="pdf-fecha" style="font-size:14px;font-weight:bold;letter-spacing:3px;color:#2c2c2c;margin:0;">SABADO, 9 DE AGOSTO 2025</p>
-        </div>
-        <div style="display:flex;gap:14px;margin-bottom:20px;">
-          <div style="flex:1;background:#fff;border:1px solid #e8dcc8;padding:12px;text-align:center;">
-            <p style="font-size:9px;letter-spacing:3px;color:#6b2737;text-transform:uppercase;margin:0 0 6px 0;">Ceremonia</p>
-            <p id="pdf-ceremonia-lugar" style="font-size:12px;font-weight:bold;margin:0 0 4px 0;">Iglesia La Dolorosa</p>
-            <p id="pdf-ceremonia-hora" style="font-size:11px;color:#666;margin:0;">04:30 pm</p>
+          <p style="font-size:11px;letter-spacing:4px;color:#6b2737;text-transform:uppercase;margin:0 0 8px 0;">Tenemos
+            el honor de invitarles a nuestra boda</p>
+          <h1 id="pdf-novios-names" style="font-size:30px;font-weight:bold;color:#2c2c2c;margin:0;letter-spacing:3px;">
+            FABIOLA &amp; JUAN PABLO</h1>
+
+          <div
+            style="border-top:2px solid #d4a843;border-bottom:2px solid #d4a843;padding:10px 0;text-align:center;margin-bottom:20px;">
+            <p id="pdf-fecha" style="font-size:14px;font-weight:bold;letter-spacing:3px;color:#2c2c2c;margin:0;">SABADO,
+              9 DE AGOSTO 2025</p>
           </div>
-          <div style="flex:1;background:#fff;border:1px solid #e8dcc8;padding:12px;text-align:center;">
-            <p style="font-size:9px;letter-spacing:3px;color:#6b2737;text-transform:uppercase;margin:0 0 6px 0;">Recepcion</p>
-            <p id="pdf-recepcion-lugar" style="font-size:12px;font-weight:bold;margin:0 0 4px 0;">Hacienda Las Manolas</p>
-            <p id="pdf-recepcion-hora" style="font-size:11px;color:#666;margin:0;">07:00 pm</p>
-          </div>
-        </div>
-        <div style="background:#6b2737;color:#fff;padding:14px 20px;text-align:center;margin-bottom:20px;">
-          <p style="font-size:9px;letter-spacing:4px;text-transform:uppercase;margin:0 0 6px 0;opacity:0.8;">PASE EXCLUSIVO</p>
-          <h2 id="pdf-guest-name" style="font-size:22px;font-weight:bold;margin:0 0 6px 0;color:#d4a843;">Familia Mendoza</h2>
-          <p id="pdf-guest-pases" style="font-size:12px;margin:0;opacity:0.9;">2 pases reservados especialmente para ti</p>
-        </div>
-        <div style="display:flex;gap:20px;align-items:center;margin-bottom:20px;">
-          <div style="text-align:center;flex-shrink:0;">
-            <div id="pdf-qrcode-box" style="display:inline-block;padding:8px;border:1px solid #e8dcc8;background:#fff;"></div>
-            <p style="font-size:9px;color:#999;margin:4px 0 0 0;">Escanea para abrir</p>
-          </div>
-          <div style="flex:1;">
-            <p style="font-size:12px;color:#444;margin:0 0 12px 0;font-style:italic;">Toca el enlace para ver la invitacion completa con nuestra cancion</p>
-            <a id="pdf-btn-link" href="#" style="display:block;background:#6b2737;color:#fff;padding:12px;text-decoration:none;font-size:13px;letter-spacing:1px;font-family:Arial,sans-serif;font-weight:bold;text-align:center;">ABRIR INVITACION INTERACTIVA</a>
-            <p id="pdf-url-text" style="font-size:8px;color:#aaa;word-break:break-all;margin:6px 0 0 0;font-family:Arial,sans-serif;"></p>
-          </div>
-        </div>
-        <div style="border-top:1px solid #d4a843;padding-top:12px;text-align:center;">
-          <p style="font-size:11px;font-style:italic;color:#666;margin:0;">Las muchas aguas no podran apagar el amor, ni lo ahogaran los rios</p>
-          <p style="font-size:10px;color:#999;margin:4px 0 0 0;">Cantar de los Cantares 8:7</p>
-        </div>
-      </div>
-      <div style="background:#d4a843;height:4px;width:100%;"></div>
-      <div style="background:#6b2737;height:10px;width:100%;"></div>
-    </div>
-  </div>
-
-  <!-- Sticky Bottom Action Floating Buttons -->
-  <div class="floating-actions">
-    <button id="btn-open-rsvp" class="action-btn btn-rsvp">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path
-          d="M.457 19.141l.034-.134.012-.045a8.9 8.9 0 011.666-3.214C1.196 14.331.671 12.695.671 10.963c0-5.111 4.67-9.27 10.414-9.27 5.745 0 10.415 4.159 10.415 9.27 0 5.112-4.67 9.271-10.415 9.271-1.637 0-3.208-.344-4.63-1.002a9.7 9.7 0 01-4.048.887 2.1 2.1 0 01-1.95-1.018z" />
-      </svg>
-      Confirmar Asistencia
-    </button>
-    <button id="btn-open-editor" class="action-btn btn-editor hidden" title="Personalizar datos de config.json">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-      </svg>
-      Editar Config
-    </button>
-  </div>
-
-  <!-- RSVP Modal -->
-  <div id="modal-rsvp" class="modal-overlay hidden">
-    <div class="modal-card">
-      <button class="modal-close" id="btn-close-rsvp">&times;</button>
-      <h3 class="modal-title">Confirmar Asistencia</h3>
-      <p class="modal-subtitle">Envía tu confirmación directamente a los novios vía WhatsApp</p>
-
-      <form id="form-rsvp" class="modal-form">
-        <div class="form-group">
-          <label for="rsvp-nombre">Nombre completo:</label>
-          <input type="text" id="rsvp-nombre" required placeholder="Ej. Carlos Mendoza" />
-        </div>
-        <div class="form-group">
-          <label for="rsvp-asistencia">¿Asistirás al evento?</label>
-          <select id="rsvp-asistencia">
-            <option value="¡Sí, con mucho gusto asistiré!">¡Sí, asistiré con mucho gusto! 🎉</option>
-            <option value="Lamentablemente no podré asistir">Lamentablemente no podré asistir 😢</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="rsvp-invitados">Número de acompañantes:</label>
-          <input type="number" id="rsvp-invitados" min="1" max="5" value="1" />
-        </div>
-        <div class="form-group">
-          <label for="rsvp-mensaje">Mensaje para los novios:</label>
-          <textarea id="rsvp-mensaje" rows="3" placeholder="¡Muchas felicidades en su gran día!"></textarea>
-        </div>
-        <button type="submit" class="btn-submit-rsvp">Enviar por WhatsApp 📱</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Config Editor Modal / Drawer -->
-  <div id="modal-editor" class="modal-overlay hidden">
-    <div class="modal-card modal-large">
-      <button class="modal-close" id="btn-close-editor">&times;</button>
-      <h3 class="modal-title">⚙️ Editor de Configuración (`config.json`)</h3>
-      <p class="modal-subtitle">Modifica los datos en vivo sin base de datos ni servidor. Presiona <strong>Descargar
-          config.json</strong> para guardar tus cambios en el archivo estático.</p>
-
-      <div class="editor-tabs">
-        <button class="tab-btn active" data-tab="tab-asistentes">📋 Lista de Asistentes Registrados</button>
-        <button class="tab-btn" data-tab="tab-generador">✉️ Generar Enlaces & PDF</button>
-        <button class="tab-btn" data-tab="tab-general">General</button>
-        <button class="tab-btn" data-tab="tab-historia">Historia</button>
-        <button class="tab-btn" data-tab="tab-lugares">Lugares & Itinerario</button>
-        <button class="tab-btn" data-tab="tab-bancos">Cuentas Bancarias</button>
-      </div>
-
-      <div class="editor-content">
-        <!-- Tab Lista de Asistentes Registrados (RSVP) -->
-        <div id="tab-asistentes" class="tab-pane active">
-          <div class="asistentes-stats-bar">
-            <div class="stat-card">
-              <span class="stat-number" id="stat-total-personas">0</span>
-              <span class="stat-label">Personas Confirmadas</span>
+          <div style="display:flex;gap:14px;margin-bottom:20px;">
+            <div style="flex:1;background:#fff;border:1px solid #e8dcc8;padding:12px;text-align:center;">
+              <p style="font-size:9px;letter-spacing:3px;color:#6b2737;text-transform:uppercase;margin:0 0 6px 0;">
+                Ceremonia</p>
+              <p id="pdf-ceremonia-lugar" style="font-size:12px;font-weight:bold;margin:0 0 4px 0;">Iglesia La Dolorosa
+              </p>
+              <p id="pdf-ceremonia-hora" style="font-size:11px;color:#666;margin:0;">04:30 pm</p>
             </div>
-            <div class="stat-card">
-              <span class="stat-number" id="stat-total-registros">0</span>
-              <span class="stat-label">Familias / Grupos</span>
+            <div style="flex:1;background:#fff;border:1px solid #e8dcc8;padding:12px;text-align:center;">
+              <p style="font-size:9px;letter-spacing:3px;color:#6b2737;text-transform:uppercase;margin:0 0 6px 0;">
+                Recepcion</p>
+              <p id="pdf-recepcion-lugar" style="font-size:12px;font-weight:bold;margin:0 0 4px 0;">Hacienda Las Manolas
+              </p>
+              <p id="pdf-recepcion-hora" style="font-size:11px;color:#666;margin:0;">07:00 pm</p>
             </div>
           </div>
-
-          <div class="table-responsive">
-            <table class="asistentes-table">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Invitado / Familia</th>
-                  <th>Estado</th>
-                  <th>Pases</th>
-                  <th>Mensaje</th>
-                </tr>
-              </thead>
-              <tbody id="asistentes-tbody">
-                <tr>
-                  <td colspan="5" class="empty-table">Cargando registros...</td>
-                </tr>
-              </tbody>
-            </table>
+          <div style="background:#6b2737;color:#fff;padding:14px 20px;text-align:center;margin-bottom:20px;">
+            <p style="font-size:9px;letter-spacing:4px;text-transform:uppercase;margin:0 0 6px 0;opacity:0.8;">PASE
+              EXCLUSIVO</p>
+            <h2 id="pdf-guest-name" style="font-size:22px;font-weight:bold;margin:0 0 6px 0;color:#d4a843;">Familia
+              Mendoza</h2>
+            <p id="pdf-guest-pases" style="font-size:12px;margin:0;opacity:0.9;">2 pases reservados especialmente para
+              ti</p>
           </div>
-
-          <div class="editor-actions">
-            <button id="btn-export-csv" class="btn-editor-action preview">📊 Descargar Excel / CSV</button>
-            <button id="btn-export-json" class="btn-editor-action download">📥 Descargar JSON</button>
-            <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️
-              Limpiar Lista</button>
+          <div style="display:flex;gap:20px;align-items:center;margin-bottom:20px;">
+            <div style="text-align:center;flex-shrink:0;">
+              <div id="pdf-qrcode-box"
+                style="display:inline-block;padding:8px;border:1px solid #e8dcc8;background:#fff;"></div>
+              <p style="font-size:9px;color:#999;margin:4px 0 0 0;">Escanea para abrir</p>
+            </div>
+            <div style="flex:1;">
+              <p style="font-size:12px;color:#444;margin:0 0 12px 0;font-style:italic;">Toca el enlace para ver la
+                invitacion completa con nuestra cancion</p>
+              <a id="pdf-btn-link" href="#"
+                style="display:block;background:#6b2737;color:#fff;padding:12px;text-decoration:none;font-size:13px;letter-spacing:1px;font-family:Arial,sans-serif;font-weight:bold;text-align:center;">ABRIR
+                INVITACION INTERACTIVA</a>
+              <p id="pdf-url-text"
+                style="font-size:8px;color:#aaa;word-break:break-all;margin:6px 0 0 0;font-family:Arial,sans-serif;">
+              </p>
+            </div>
+          </div>
+          <div style="border-top:1px solid #d4a843;padding-top:12px;text-align:center;">
+            <p style="font-size:11px;font-style:italic;color:#666;margin:0;">Las muchas aguas no podran apagar el amor,
+              ni lo ahogaran los rios</p>
+            <p style="font-size:10px;color:#999;margin:4px 0 0 0;">Cantar de los Cantares 8:7</p>
           </div>
         </div>
-
-        <!-- Tab General -->
-        <div id="tab-general" class="tab-pane">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Novia:</label>
-              <input type="text" id="edit-novia" />
-            </div>
-            <div class="form-group">
-              <label>Novio:</label>
-              <input type="text" id="edit-novio" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Título Periódico:</label>
-              <input type="text" id="edit-tituloPeriodico" />
-            </div>
-            <div class="form-group">
-              <label>Gran Titular:</label>
-              <input type="text" id="edit-granTitular" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Fecha Formateada:</label>
-              <input type="text" id="edit-fechaTextoHeader" />
-            </div>
-            <div class="form-group">
-              <label>Fecha ISO (para temporizador):</label>
-              <input type="datetime-local" id="edit-fechaISO" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>WhatsApp (con código de país, ej. 5215500000000):</label>
-            <input type="text" id="edit-whatsapp" />
-          </div>
-          <div class="form-group">
-            <label>URL Canción MP3:</label>
-            <input type="text" id="edit-audioUrl" />
-          </div>
-        </div>
-
-        <!-- Tab Historia -->
-        <div id="tab-historia" class="tab-pane">
-          <div class="form-group">
-            <label>Texto Dos Almas:</label>
-            <textarea id="edit-historia-1" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Autor / Firma:</label>
-            <textarea id="edit-historia-2" rows="2"></textarea>
-          </div>
-        </div>
-
-        <!-- Tab Lugares -->
-        <div id="tab-lugares" class="tab-pane">
-          <h4>Ceremonia Religiosa</h4>
-          <div class="form-row">
-            <div class="form-group"><label>Lugar:</label><input type="text" id="edit-ceremonia-lugar" /></div>
-            <div class="form-group"><label>Hora:</label><input type="text" id="edit-ceremonia-hora" /></div>
-          </div>
-          <div class="form-group"><label>Link Google Maps:</label><input type="text" id="edit-ceremonia-mapa" /></div>
-
-          <h4>Recepción</h4>
-          <div class="form-row">
-            <div class="form-group"><label>Lugar:</label><input type="text" id="edit-recepcion-lugar" /></div>
-            <div class="form-group"><label>Hora:</label><input type="text" id="edit-recepcion-hora" /></div>
-          </div>
-          <div class="form-group"><label>Link Google Maps:</label><input type="text" id="edit-recepcion-mapa" /></div>
-        </div>
-
-        <!-- Tab Bancos -->
-        <div id="tab-bancos" class="tab-pane">
-          <p class="small-info">Modifica los datos bancarios o titulares:</p>
-          <div class="form-group">
-            <label>Titular 1 & Bancos (Texto libre o formato):</label>
-            <input type="text" id="edit-banco-titular1" placeholder="Nombre titular 1" />
-            <input type="text" id="edit-banco-num1" placeholder="BBVA: 1111 1111 0123456789 | PLIN: 000 333 777" />
-          </div>
-          <div class="form-group">
-            <label>Titular 2 & Bancos:</label>
-            <input type="text" id="edit-banco-titular2" placeholder="Nombre titular 2" />
-            <input type="text" id="edit-banco-num2" placeholder="BCP: 0000 XXXXX 22222 | YAPE: 000 555 777" />
-          </div>
-        </div>
-
-        <!-- Tab Generador de Enlaces Personalizados & PDF -->
-        <div id="tab-generador" class="tab-pane">
-          <p class="small-info">Crea un enlace personalizado y descarga una tarjeta PDF interactiva para cada invitado:
-          </p>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="gen-nombre">Nombre del Invitado / Familia:</label>
-              <input type="text" id="gen-nombre" placeholder="Ej. Familia Mendoza" />
-            </div>
-            <div class="form-group">
-              <label for="gen-pases">Número de Pases:</label>
-              <input type="number" id="gen-pases" min="1" max="10" value="2" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Enlace Personalizado Generado:</label>
-            <input type="text" id="gen-link-result" readonly
-              placeholder="https://tuboda.com/?invitado=Familia+Mendoza&pases=2" />
-          </div>
-
-          <div class="form-group">
-            <label>Mensaje listo para enviar por WhatsApp:</label>
-            <textarea id="gen-msg-result" rows="3" readonly></textarea>
-          </div>
-
-          <div class="form-row">
-            <button id="btn-copy-guest-link" class="btn-editor-action preview">Copiar Solo Enlace 🔗</button>
-            <button id="btn-copy-guest-msg" class="btn-editor-action download">Copiar Mensaje Completo 📲</button>
-          </div>
-
-          <div class="form-row" style="margin-top: 10px;">
-            <button id="btn-generate-pdf-guest" class="btn-editor-action"
-              style="background:#8b0000; color:#fff; grid-column: span 2; padding: 14px;">🎵 Abrir Invitación Personalizada con Música</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="editor-actions">
-        <button id="btn-save-preview" class="btn-editor-action preview">Aplicar Cambios en Pantalla</button>
-        <button id="btn-download-config" class="btn-editor-action download">📥 Descargar config.json</button>
+        <div style="background:#d4a843;height:4px;width:100%;"></div>
+        <div style="background:#6b2737;height:10px;width:100%;"></div>
       </div>
     </div>
-  </div>
 
-  <!-- Toast Notification element -->
-  <div id="toast" class="toast hidden"></div>
+    <!-- Sticky Bottom Action Floating Buttons -->
+    <div class="floating-actions">
+      <button id="btn-open-rsvp" class="action-btn btn-rsvp">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M.457 19.141l.034-.134.012-.045a8.9 8.9 0 011.666-3.214C1.196 14.331.671 12.695.671 10.963c0-5.111 4.67-9.27 10.414-9.27 5.745 0 10.415 4.159 10.415 9.27 0 5.112-4.67 9.271-10.415 9.271-1.637 0-3.208-.344-4.63-1.002a9.7 9.7 0 01-4.048.887 2.1 2.1 0 01-1.95-1.018z" />
+        </svg>
+        Confirmar Asistencia
+      </button>
+      <button id="btn-open-editor" class="action-btn btn-editor hidden" title="Personalizar datos de config.json">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+        Editar Config
+      </button>
+    </div>
 
-  <script type="module" src="./main.js"></script>
+    <!-- RSVP Modal -->
+    <div id="modal-rsvp" class="modal-overlay hidden">
+      <div class="modal-card">
+        <button class="modal-close" id="btn-close-rsvp">&times;</button>
+        <h3 class="modal-title">Confirmar Asistencia</h3>
+        <p class="modal-subtitle">Envía tu confirmación directamente a los novios vía WhatsApp</p>
+
+        <form id="form-rsvp" class="modal-form">
+          <div class="form-group">
+            <label for="rsvp-nombre">Nombre completo:</label>
+            <input type="text" id="rsvp-nombre" required placeholder="Ej. Carlos Mendoza" />
+          </div>
+          <div class="form-group">
+            <label for="rsvp-asistencia">¿Asistirás al evento?</label>
+            <select id="rsvp-asistencia">
+              <option value="¡Sí, con mucho gusto asistiré!">¡Sí, asistiré con mucho gusto! 🎉</option>
+              <option value="Lamentablemente no podré asistir">Lamentablemente no podré asistir 😢</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="rsvp-invitados">Número de acompañantes:</label>
+            <input type="number" id="rsvp-invitados" min="1" max="5" value="1" />
+          </div>
+          <div class="form-group">
+            <label for="rsvp-mensaje">Mensaje para los novios:</label>
+            <textarea id="rsvp-mensaje" rows="3" placeholder="¡Muchas felicidades en su gran día!"></textarea>
+          </div>
+          <button type="submit" class="btn-submit-rsvp">Enviar por WhatsApp 📱</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Config Editor Modal / Drawer -->
+    <div id="modal-editor" class="modal-overlay hidden">
+      <div class="modal-card modal-large">
+        <button class="modal-close" id="btn-close-editor">&times;</button>
+        <h3 class="modal-title">⚙️ Editor de Configuración (`config.json`)</h3>
+        <p class="modal-subtitle">Modifica los datos en vivo sin base de datos ni servidor. Presiona <strong>Descargar
+            config.json</strong> para guardar tus cambios en el archivo estático.</p>
+
+        <div class="editor-tabs">
+          <button class="tab-btn active" data-tab="tab-asistentes">📋 Lista de Asistentes Registrados</button>
+          <button class="tab-btn" data-tab="tab-generador">✉️ Generar Enlaces & PDF</button>
+          <button class="tab-btn" data-tab="tab-general">General</button>
+          <button class="tab-btn" data-tab="tab-historia">Historia</button>
+          <button class="tab-btn" data-tab="tab-lugares">Lugares & Itinerario</button>
+          <button class="tab-btn" data-tab="tab-bancos">Cuentas Bancarias</button>
+        </div>
+
+        <div class="editor-content">
+          <!-- Tab Lista de Asistentes Registrados (RSVP) -->
+          <div id="tab-asistentes" class="tab-pane active">
+            <div class="asistentes-stats-bar">
+              <div class="stat-card">
+                <span class="stat-number" id="stat-total-personas">0</span>
+                <span class="stat-label">Personas Confirmadas</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="stat-total-registros">0</span>
+                <span class="stat-label">Familias / Grupos</span>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="asistentes-table">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Invitado / Familia</th>
+                    <th>Estado</th>
+                    <th>Pases</th>
+                    <th>Mensaje</th>
+                  </tr>
+                </thead>
+                <tbody id="asistentes-tbody">
+                  <tr>
+                    <td colspan="5" class="empty-table">Cargando registros...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="editor-actions">
+              <button id="btn-export-csv" class="btn-editor-action preview">📊 Descargar Excel / CSV</button>
+              <button id="btn-export-json" class="btn-editor-action download">📥 Descargar JSON</button>
+              <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️
+                Limpiar Lista</button>
+            </div>
+          </div>
+
+          <!-- Tab General -->
+          <div id="tab-general" class="tab-pane">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Novia:</label>
+                <input type="text" id="edit-novia" />
+              </div>
+              <div class="form-group">
+                <label>Novio:</label>
+                <input type="text" id="edit-novio" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Título Periódico:</label>
+                <input type="text" id="edit-tituloPeriodico" />
+              </div>
+              <div class="form-group">
+                <label>Gran Titular:</label>
+                <input type="text" id="edit-granTitular" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Fecha Formateada:</label>
+                <input type="text" id="edit-fechaTextoHeader" />
+              </div>
+              <div class="form-group">
+                <label>Fecha ISO (para temporizador):</label>
+                <input type="datetime-local" id="edit-fechaISO" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp (con código de país, ej. 5215500000000):</label>
+              <input type="text" id="edit-whatsapp" />
+            </div>
+            <div class="form-group">
+              <label>URL Canción MP3:</label>
+              <input type="text" id="edit-audioUrl" />
+            </div>
+          </div>
+
+          <!-- Tab Historia -->
+          <div id="tab-historia" class="tab-pane">
+            <div class="form-group">
+              <label>Texto Dos Almas:</label>
+              <textarea id="edit-historia-1" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Autor / Firma:</label>
+              <textarea id="edit-historia-2" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- Tab Lugares -->
+          <div id="tab-lugares" class="tab-pane">
+            <h4>Ceremonia Religiosa</h4>
+            <div class="form-row">
+              <div class="form-group"><label>Lugar:</label><input type="text" id="edit-ceremonia-lugar" /></div>
+              <div class="form-group"><label>Hora:</label><input type="text" id="edit-ceremonia-hora" /></div>
+            </div>
+            <div class="form-group"><label>Link Google Maps:</label><input type="text" id="edit-ceremonia-mapa" /></div>
+
+            <h4>Recepción</h4>
+            <div class="form-row">
+              <div class="form-group"><label>Lugar:</label><input type="text" id="edit-recepcion-lugar" /></div>
+              <div class="form-group"><label>Hora:</label><input type="text" id="edit-recepcion-hora" /></div>
+            </div>
+            <div class="form-group"><label>Link Google Maps:</label><input type="text" id="edit-recepcion-mapa" /></div>
+          </div>
+
+          <!-- Tab Bancos -->
+          <div id="tab-bancos" class="tab-pane">
+            <p class="small-info">Modifica los datos bancarios o titulares:</p>
+            <div class="form-group">
+              <label>Titular 1 & Bancos (Texto libre o formato):</label>
+              <input type="text" id="edit-banco-titular1" placeholder="Nombre titular 1" />
+              <input type="text" id="edit-banco-num1" placeholder="BBVA: 1111 1111 0123456789 | PLIN: 000 333 777" />
+            </div>
+            <div class="form-group">
+              <label>Titular 2 & Bancos:</label>
+              <input type="text" id="edit-banco-titular2" placeholder="Nombre titular 2" />
+              <input type="text" id="edit-banco-num2" placeholder="BCP: 0000 XXXXX 22222 | YAPE: 000 555 777" />
+            </div>
+          </div>
+
+          <!-- Tab Generador de Enlaces Personalizados & PDF -->
+          <div id="tab-generador" class="tab-pane">
+            <p class="small-info">Crea un enlace personalizado y descarga una tarjeta PDF interactiva para cada
+              invitado:
+            </p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="gen-nombre">Nombre del Invitado / Familia:</label>
+                <input type="text" id="gen-nombre" placeholder="Ej. Familia Mendoza" />
+              </div>
+              <div class="form-group">
+                <label for="gen-pases">Número de Pases:</label>
+                <input type="number" id="gen-pases" min="1" max="10" value="2" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Enlace Personalizado Generado:</label>
+              <input type="text" id="gen-link-result" readonly
+                placeholder="https://tuboda.com/?invitado=Familia+Mendoza&pases=2" />
+            </div>
+
+            <div class="form-group">
+              <label>Mensaje listo para enviar por WhatsApp:</label>
+              <textarea id="gen-msg-result" rows="3" readonly></textarea>
+            </div>
+
+            <div class="form-row">
+              <button id="btn-copy-guest-link" class="btn-editor-action preview">Copiar Solo Enlace 🔗</button>
+              <button id="btn-copy-guest-msg" class="btn-editor-action download">Copiar Mensaje Completo 📲</button>
+            </div>
+
+            <div class="form-row" style="margin-top: 10px;">
+              <button id="btn-generate-pdf-guest" class="btn-editor-action"
+                style="background:#8b0000; color:#fff; grid-column: span 2; padding: 14px;">🎵 Abrir Invitación
+                Personalizada con Música</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor-actions">
+          <button id="btn-save-preview" class="btn-editor-action preview">Aplicar Cambios en Pantalla</button>
+          <button id="btn-download-config" class="btn-editor-action download">📥 Descargar config.json</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification element -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="./main.js"></script>
 </body>
 
 </html>

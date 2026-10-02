@@ -94,7 +94,7 @@ async function loadConfiguration() {
     const timestamp = new Date().getTime();
     const response = await fetch(`./config.json?v=${timestamp}`);
     const masterConfig = await response.json();
-    
+
     // Always use master config to prevent caching/draft issues
     localStorage.removeItem('wedding_config_draft');
     appConfig = masterConfig;
@@ -346,7 +346,7 @@ function setupEventListeners() {
     // Prepare WhatsApp Message
     const waNum = appConfig?.whatsappRSVP || '5215500000000';
     const textMsg = `¡Hola ${appConfig?.novia} y ${appConfig?.novio}! 👋\n\nSoy *${nombre}*.\n*Asistencia:* ${asistencia}\n*Pases Asignados Originales:* ${pasesAsignados}\n*Personas Confirmadas:* ${invitados}\n*Mensaje:* ${mensaje || '¡Nos vemos pronto!'}`;
-    
+
     const waUrl = `https://wa.me/${waNum}?text=${encodeURIComponent(textMsg)}`;
     window.open(waUrl, '_blank');
     modalRsvp.classList.add('hidden');
@@ -460,7 +460,7 @@ function setupTabs() {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-      
+
       tab.classList.add('active');
       const targetPane = document.getElementById(tab.dataset.tab);
       if (targetPane) targetPane.classList.add('active');
@@ -610,7 +610,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
   const filename = `Invitacion_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
 
-  const novios = appConfig ? `${(appConfig.novia||'FABIOLA').toUpperCase()} &amp; ${(appConfig.novio||'JUAN PABLO').toUpperCase()}` : 'FABIOLA &amp; JUAN PABLO';
+  const novios = appConfig ? `${(appConfig.novia || 'FABIOLA').toUpperCase()} &amp; ${(appConfig.novio || 'JUAN PABLO').toUpperCase()}` : 'FABIOLA &amp; JUAN PABLO';
   const fecha = (appConfig?.fechaCorazones || appConfig?.fechaTextoHeader || 'SABADO, 9 DE AGOSTO 2025').toUpperCase();
   const cerLugar = (appConfig?.ceremonia?.lugar || 'Iglesia La Dolorosa').replace(/"/g, '');
   const cerHora = appConfig?.ceremonia?.hora || '04:30 pm';
@@ -682,7 +682,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
       </div>
       <div class="pass-box">
         <h2>${nombre}</h2>
-        <p>¡Hola!<br><br>Tenemos el gran honor de invitarte a nuestra boda. Hemos reservado especialmente ${pases} pase${pases==1?'':'s'} para ti.</p>
+        <p>¡Hola!<br><br>Tenemos el gran honor de invitarte a nuestra boda. Hemos reservado especialmente ${pases} pase${pases == 1 ? '' : 's'} para ti.</p>
       </div>
       <div class="qr-section">
         <div class="qr-wrap">
