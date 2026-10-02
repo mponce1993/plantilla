@@ -299,15 +299,32 @@ function setupEventListeners() {
   document.getElementById('btn-open-rsvp')?.addEventListener('click', () => modalRsvp.classList.remove('hidden'));
   document.getElementById('btn-close-rsvp')?.addEventListener('click', () => modalRsvp.classList.add('hidden'));
 
+  // Enforce max on rsvp-invitados field whenever it changes
+  const invitadosInput = document.getElementById('rsvp-invitados');
+  invitadosInput?.addEventListener('input', () => {
+    const maxPases = parseInt(window.currentPasesAsignados || invitadosInput.max || '10', 10);
+    if (parseInt(invitadosInput.value, 10) > maxPases) {
+      invitadosInput.value = maxPases;
+      showToast(`⚠️ Solo tienes ${maxPases} pase${maxPases > 1 ? 's' : ''} reservado${maxPases > 1 ? 's' : ''}.`);
+    }
+  });
+
   // Submit RSVP Form (Saves in Local Storage & Opens WhatsApp)
   document.getElementById('form-rsvp')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const nombre = document.getElementById('rsvp-nombre').value;
     const asistencia = document.getElementById('rsvp-asistencia').value;
-    const invitados = document.getElementById('rsvp-invitados').value;
+    let invitados = parseInt(document.getElementById('rsvp-invitados').value, 10);
     const mensaje = document.getElementById('rsvp-mensaje').value;
 
-    const pasesAsignados = window.currentPasesAsignados || invitados;
+    const pasesAsignados = parseInt(window.currentPasesAsignados || invitados, 10);
+
+    // Enforce max pases on submit
+    if (invitados > pasesAsignados) {
+      invitados = pasesAsignados;
+      document.getElementById('rsvp-invitados').value = pasesAsignados;
+      showToast(`⚠️ Se ajustó a ${pasesAsignados} pase${pasesAsignados > 1 ? 's' : ''} reservado${pasesAsignados > 1 ? 's' : ''}.`);
+    }
     const fechaHora = new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' });
 
     // Save to local storage list
