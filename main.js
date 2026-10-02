@@ -608,6 +608,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const pases = pasesGuest || document.getElementById('gen-pases')?.value || '2';
   const baseUrl = `${window.location.origin}${window.location.pathname}`;
   const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
+  const filename = `Invitacion_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
 
   const novios = appConfig ? `${(appConfig.novia||'FABIOLA').toUpperCase()} &amp; ${(appConfig.novio||'JUAN PABLO').toUpperCase()}` : 'FABIOLA &amp; JUAN PABLO';
   const fecha = (appConfig?.fechaCorazones || appConfig?.fechaTextoHeader || 'SABADO, 9 DE AGOSTO 2025').toUpperCase();
@@ -615,6 +616,8 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const cerHora = appConfig?.ceremonia?.hora || '04:30 pm';
   const recLugar = (appConfig?.recepcion?.lugar || 'Hacienda Las Manolas').replace(/"/g, '');
   const recHora = appConfig?.recepcion?.hora || '07:00 pm';
+
+  showToast('Generando PDF...');
 
   const htmlContent = `<!DOCTYPE html>
 <html lang="es">
@@ -626,7 +629,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #fdf8f2; font-family: Georgia, serif; }
-    .card { width: 148mm; background: #fdf8f2; color: #2c2c2c; }
+    .card { width: 148mm; background: #fdf8f2; color: #2c2c2c; margin: 0 auto; }
     .bar-wine { background: #6b2737; height: 14px; }
     .bar-gold { background: #d4a843; height: 4px; }
     .content { padding: 28px 32px; }
@@ -642,9 +645,8 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
     .venue-box .place { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
     .venue-box .time { font-size: 11px; color: #666; }
     .pass-box { background: #6b2737; color: #fff; padding: 16px 20px; text-align: center; margin-bottom: 20px; }
-    .pass-box .pass-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.8; margin-bottom: 6px; }
-    .pass-box h2 { font-size: 22px; font-weight: bold; color: #d4a843; margin-bottom: 6px; }
-    .pass-box p { font-size: 12px; opacity: 0.9; }
+    .pass-box h2 { font-size: 22px; font-weight: bold; color: #d4a843; margin-bottom: 10px; }
+    .pass-box p { font-size: 13px; opacity: 0.95; line-height: 1.5; }
     .qr-section { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
     .qr-wrap { text-align: center; flex-shrink: 0; }
     .qr-wrap p { font-size: 9px; color: #999; margin-top: 4px; }
@@ -655,11 +657,6 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
     .footer-verse { border-top: 1px solid #d4a843; padding-top: 12px; text-align: center; }
     .footer-verse p { font-size: 10px; font-style: italic; color: #666; margin-bottom: 4px; }
     .footer-verse small { font-size: 9px; color: #999; }
-    @media print {
-      body { background: #fff; padding: 0; }
-      .card { width: 100%; }
-      .no-print { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -686,9 +683,8 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
         </div>
       </div>
       <div class="pass-box">
-        <p class="pass-label">Pase Exclusivo</p>
         <h2>${nombre}</h2>
-        <p>${pases} pase${pases==1?'':'s'} reservado${pases==1?'':'s'} especialmente para ti</p>
+        <p>¡Hola!<br><br>Tenemos el gran honor de invitarte a nuestra boda. Hemos reservado especialmente ${pases} pase${pases==1?'':'s'} para ti.</p>
       </div>
       <div class="qr-section">
         <div class="qr-wrap">
@@ -697,7 +693,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
         </div>
         <div class="link-section">
           <p>Toca el enlace para ver la invitacion completa con nuestra cancion</p>
-          <a class="link-btn" href="${fullUrl}">ABRIR INVITACION INTERACTIVA</a>
+          <a class="link-btn" href="${fullUrl}">ABRIR INVITACION</a>
           <p class="url-text">${fullUrl}</p>
         </div>
       </div>
@@ -716,9 +712,10 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
       correctLevel: QRCode.CorrectLevel.H
     });
     setTimeout(function() {
-      var opt = { margin: 0, filename: '', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#fdf8f2' }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' } };
+      var opt = { margin: 0, filename: '${filename}', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#fdf8f2' }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' } };
       html2pdf().set(opt).from(document.getElementById('card')).save().then(function() { window.close(); });
     }, 900);
+  <\/script>
 </body>
 </html>`;
 
@@ -731,7 +728,6 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
     showToast('Permite ventanas emergentes para generar el PDF');
   }
 }
-
 // Utility DOM Helpers
 function setTxt(id, val) {
   const el = document.getElementById(id);
