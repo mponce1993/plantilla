@@ -601,50 +601,40 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const baseUrl = `${window.location.origin}${window.location.pathname}`;
   const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
 
-  showToast('⏳ Generando tarjeta PDF interactiva...');
+  showToast('⏳ Generando invitación PDF (esto puede tardar unos segundos)...');
 
-  // Update PDF Card Template elements
-  const elNovios = document.getElementById('pdf-novios-names');
-  const elGuest = document.getElementById('pdf-guest-name');
-  const elPases = document.getElementById('pdf-guest-pases');
-  const elQrBox = document.getElementById('pdf-qrcode-box');
-  const elLinkBtn = document.getElementById('pdf-btn-link');
-
-  if (elNovios && appConfig) elNovios.innerText = `${appConfig.novia?.toUpperCase()} & ${appConfig.novio?.toUpperCase()}`;
-  if (elGuest) elGuest.innerText = nombre;
-  if (elPases) elPases.innerText = `Hemos reservado ${pases} ${pases == 1 ? 'pase' : 'pases'} especialmente para ti.`;
-  if (elLinkBtn) elLinkBtn.setAttribute('href', fullUrl);
-
-  // Generate QR code into qrcode box
-  if (elQrBox) {
-    elQrBox.innerHTML = '';
-    if (window.QRCode) {
-      new QRCode(elQrBox, {
-        text: fullUrl,
-        width: 130,
-        height: 130,
-        colorDark: "#1a1a1a",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    }
-  }
-
-  // Small delay for QR render
-  await new Promise(r => setTimeout(r, 350));
-
-  const element = document.getElementById('pdf-card-template');
+  const element = document.getElementById('newspaper');
   if (!element || !window.html2pdf) {
     showToast('Error cargando generador de PDF');
     return;
   }
 
+  // Create a temporary banner at the top of the newspaper to click for music
+  const audioBanner = document.createElement('a');
+  audioBanner.href = fullUrl;
+  audioBanner.target = '_blank';
+  audioBanner.id = 'temp-pdf-audio-banner';
+  audioBanner.style.display = 'block';
+  audioBanner.style.backgroundColor = '#8b0000';
+  audioBanner.style.color = '#fff';
+  audioBanner.style.textAlign = 'center';
+  audioBanner.style.padding = '20px';
+  audioBanner.style.textDecoration = 'none';
+  audioBanner.style.fontFamily = 'Montserrat, sans-serif';
+  audioBanner.style.fontWeight = 'bold';
+  audioBanner.style.fontSize = '18px';
+  audioBanner.style.marginBottom = '20px';
+  audioBanner.innerHTML = '🎵 TOCA AQUÍ PARA ESCUCHAR NUESTRA CANCIÓN Y VER INVITACIÓN INTERACTIVA 🎵';
+
+  element.insertBefore(audioBanner, element.firstChild);
+
+  // Configure html2pdf to handle multi-page long website
   const opt = {
-    margin: [5, 5, 5, 5],
+    margin: [0, 0, 0, 0],
     filename: `Invitacion_Boda_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, logging: false },
-    jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' }
+    image: { type: 'jpeg', quality: 0.95 },
+    html2canvas: { scale: 1.5, useCORS: true, logging: false, windowWidth: 800 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
   };
 
   try {
@@ -653,6 +643,10 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   } catch (err) {
     console.error('Error al generar PDF:', err);
     showToast('Error al descargar el PDF');
+  } finally {
+    // Remove the temporary audio banner after generation
+    const banner = document.getElementById('temp-pdf-audio-banner');
+    if (banner) banner.remove();
   }
 }
 
