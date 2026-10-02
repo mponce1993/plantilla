@@ -465,10 +465,13 @@ body {
 
 .photo-itinerary {
   transform: rotate(-1deg) !important;
+  width: 100%;
 }
 
 .photo-itinerary img {
-  height: 150px;
+  width: 100%;
+  height: auto;
+  max-height: 450px;
   object-fit: cover;
 }
 
