@@ -601,9 +601,39 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const baseUrl = `${window.location.origin}${window.location.pathname}`;
   const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
 
-  showToast('⏳ Generando invitación PDF (esto puede tardar unos segundos)...');
+  showToast('⏳ Generando invitación PDF...');
 
-  const element = document.getElementById('newspaper');
+  // Update PDF Card Template elements
+  const elNovios = document.getElementById('pdf-novios-names');
+  const elGuest = document.getElementById('pdf-guest-name');
+  const elPases = document.getElementById('pdf-guest-pases');
+  const elQrBox = document.getElementById('pdf-qrcode-box');
+  const elLinkBtn = document.getElementById('pdf-btn-link');
+
+  if (elNovios && appConfig) elNovios.innerText = `${appConfig.novia?.toUpperCase()} & ${appConfig.novio?.toUpperCase()}`;
+  if (elGuest) elGuest.innerText = nombre;
+  if (elPases) elPases.innerText = `Hemos reservado ${pases} ${pases == 1 ? 'pase' : 'pases'} especialmente para ti.`;
+  if (elLinkBtn) elLinkBtn.setAttribute('href', fullUrl);
+
+  // Generate QR code into qrcode box
+  if (elQrBox) {
+    elQrBox.innerHTML = '';
+    if (window.QRCode) {
+      new QRCode(elQrBox, {
+        text: fullUrl,
+        width: 130,
+        height: 130,
+        colorDark: "#1a1a1a",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+  }
+
+  // Small delay for QR render
+  await new Promise(r => setTimeout(r, 350));
+
+  const element = document.getElementById('pdf-card-template');
   if (!element || !window.html2pdf) {
     showToast('Error cargando generador de PDF');
     return;
@@ -628,13 +658,12 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
 
   element.insertBefore(audioBanner, element.firstChild);
 
-  // Configure html2pdf to handle multi-page long website
   const opt = {
-    margin: [0, 0, 0, 0],
+    margin: [5, 5, 5, 5],
     filename: `Invitacion_Boda_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true, logging: false },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' }
   };
 
   try {
