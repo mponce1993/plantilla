@@ -1,4 +1,4 @@
-// main.js - Plantilla de Invitación de Boda Estilo Periódico
+﻿// main.js - Plantilla de Invitación de Boda Estilo Periódico
 
 let appConfig = null;
 let timerInterval = null;
@@ -622,9 +622,10 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   <meta charset="UTF-8">
   <title>Invitacion - ${nombre}</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"><\/script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #f0ece4; display: flex; justify-content: center; align-items: flex-start; padding: 20px; font-family: Georgia, serif; }
+    body { background: #fdf8f2; font-family: Georgia, serif; }
     .card { width: 148mm; background: #fdf8f2; color: #2c2c2c; }
     .bar-wine { background: #6b2737; height: 14px; }
     .bar-gold { background: #d4a843; height: 4px; }
@@ -662,7 +663,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" id="card">
     <div class="bar-wine"></div>
     <div class="bar-gold"></div>
     <div class="content">
@@ -714,8 +715,10 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
       colorDark: '#6b2737', colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
-    setTimeout(() => window.print(), 800);
-  <\/script>
+    setTimeout(function() {
+      var opt = { margin: 0, filename: '', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#fdf8f2' }, jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' } };
+      html2pdf().set(opt).from(document.getElementById('card')).save().then(function() { window.close(); });
+    }, 900);
 </body>
 </html>`;
 
@@ -723,7 +726,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   if (printWin) {
     printWin.document.write(htmlContent);
     printWin.document.close();
-    showToast('Ventana de PDF abierta - guarda como PDF');
+    showToast('Descargando PDF...');
   } else {
     showToast('Permite ventanas emergentes para generar el PDF');
   }
