@@ -602,17 +602,77 @@ function setupLinkGenerator() {
   updateGenerator();
 }
 
-// Open personalized invitation link (with music) for Guest
-function generateGuestPDF(nombreGuest, pasesGuest) {
+// Generate and Download PDF Invitation Card for Guest
+async function generateGuestPDF(nombreGuest, pasesGuest) {
   const nombre = nombreGuest || document.getElementById('gen-nombre')?.value?.trim() || 'Familia Mendoza';
   const pases = pasesGuest || document.getElementById('gen-pases')?.value || '2';
-
   const baseUrl = `${window.location.origin}${window.location.pathname}`;
   const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
 
-  // Open the personalized invitation in a new tab so the music plays
-  window.open(fullUrl, '_blank');
-  showToast('🎵 ¡Invitación personalizada abierta con música!');
+  if (!window.html2pdf) {
+    // Fallback: open invitation in new tab
+    window.open(fullUrl, '_blank');
+    return;
+  }
+
+  showToast('Generando PDF...');
+
+  // Fill template fields
+  const setId = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+  const setAttrEl = (id, attr, val) => { const el = document.getElementById(id); if (el) el.setAttribute(attr, val); };
+
+  if (appConfig) {
+    setId('pdf-novios-names', `${(appConfig.novia || 'FABIOLA').toUpperCase()} & ${(appConfig.novio || 'JUAN PABLO').toUpperCase()}`);
+    setId('pdf-fecha', (appConfig.fechaCorazones || appConfig.fechaTextoHeader || '').toUpperCase());
+    setId('pdf-ceremonia-lugar', (appConfig.ceremonia?.lugar || '').replace(/"/g, ''));
+    setId('pdf-ceremonia-hora', appConfig.ceremonia?.hora || '');
+    setId('pdf-recepcion-lugar', (appConfig.recepcion?.lugar || '').replace(/"/g, ''));
+    setId('pdf-recepcion-hora', appConfig.recepcion?.hora || '');
+  }
+  setId('pdf-guest-name', nombre);
+  setId('pdf-guest-pases', `${pases} pase${pases == 1 ? '' : 's'} reservado${pases == 1 ? '' : 's'} especialmente para ti`);
+  setAttrEl('pdf-btn-link', 'href', fullUrl);
+  setId('pdf-url-text', fullUrl);
+
+  // Generate QR code
+  const qrBox = document.getElementById('pdf-qrcode-box');
+  if (qrBox) {
+    qrBox.innerHTML = '';
+    if (window.QRCode) {
+      new QRCode(qrBox, { text: fullUrl, width: 110, height: 110, colorDark: '#6b2737', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+    }
+  }
+
+  await new Promise(r => setTimeout(r, 400));
+
+  const wrapper = document.getElementById('pdf-card-wrapper');
+  const element = document.getElementById('pdf-card-template');
+  if (!element || !wrapper) { showToast('Error: template no encontrado'); return; }
+
+  // Make visible for html2canvas
+  wrapper.style.left = '0px';
+  wrapper.style.top = '0px';
+  wrapper.style.zIndex = '999999';
+  await new Promise(r => setTimeout(r, 150));
+
+  const opt = {
+    margin: 0,
+    filename: `Invitacion_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#fdf8f2' },
+    jsPDF: { unit: 'mm', format: 'a5', orientation: 'portrait' }
+  };
+
+  try {
+    await html2pdf().set(opt).from(element).save();
+    showToast('PDF descargado!');
+  } catch (err) {
+    console.error(err);
+    showToast('Error al generar PDF');
+  } finally {
+    wrapper.style.left = '-9999px';
+    wrapper.style.zIndex = '-1';
+  }
 }
 
 // Utility DOM Helpers

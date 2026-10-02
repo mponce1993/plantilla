@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -268,45 +268,55 @@
 
   </main>
 
-  <!-- Hidden PDF Card Printable Template -->
-  <div id="pdf-card-wrapper" style="position: absolute; left: -9999px; top: -9999px;">
-    <div id="pdf-card-template" class="pdf-card-container">
-      <div class="pdf-card-inner">
-        <div class="pdf-meta-bar">
-          <span id="pdf-novios-names">FABIOLA & JUAN PABLO</span>
-          <span>EDICIÓN ESPECIAL</span>
+  <!-- PDF Invitation Card Template -->
+  <div id="pdf-card-wrapper" style="position:fixed;left:-9999px;top:0;width:550px;background:#fff;z-index:-1;">
+    <div id="pdf-card-template" style="width:550px;background:#fdf8f2;font-family:Georgia,serif;color:#2c2c2c;padding:0;box-sizing:border-box;">
+      <div style="background:#6b2737;height:14px;width:100%;"></div>
+      <div style="background:#d4a843;height:4px;width:100%;"></div>
+      <div style="padding:28px 36px;">
+        <div style="text-align:center;margin-bottom:18px;">
+          <p style="font-size:11px;letter-spacing:4px;color:#6b2737;text-transform:uppercase;margin:0 0 8px 0;">Tenemos el honor de invitarles a</p>
+          <h1 id="pdf-novios-names" style="font-size:30px;font-weight:bold;color:#2c2c2c;margin:0;letter-spacing:3px;">FABIOLA &amp; JUAN PABLO</h1>
+          <p style="font-size:15px;color:#6b2737;font-style:italic;margin:6px 0 0 0;">Nos casamos</p>
         </div>
-        <div class="pdf-divider-double"></div>
-
-        <h1 class="pdf-headline">NOS CASAMOS</h1>
-        <p class="pdf-subheadline">INVITACIÓN DE BODA INTERACTIVA</p>
-        <div class="pdf-divider-single"></div>
-
-        <div class="pdf-pass-box">
-          <div class="pdf-pass-stamp">PASE EXCLUSIVO 🎟️</div>
-          <h2 id="pdf-guest-name" class="pdf-guest-name">Familia Mendoza</h2>
-          <p id="pdf-guest-pases" class="pdf-guest-pases">Hemos reservado 2 pases especialmente para ti.</p>
+        <div style="border-top:2px solid #d4a843;border-bottom:2px solid #d4a843;padding:10px 0;text-align:center;margin-bottom:20px;">
+          <p id="pdf-fecha" style="font-size:14px;font-weight:bold;letter-spacing:3px;color:#2c2c2c;margin:0;">SABADO, 9 DE AGOSTO 2025</p>
         </div>
-
-        <div class="pdf-body-text">
-          <p>Nos complace invitarte a celebrar la unión de nuestras vidas.</p>
-          <p class="pdf-highlight">Escanea el código QR o presiona el botón interactivo para escuchar nuestra canción de
-            boda y ver todos los detalles en vivo:</p>
+        <div style="display:flex;gap:14px;margin-bottom:20px;">
+          <div style="flex:1;background:#fff;border:1px solid #e8dcc8;padding:12px;text-align:center;">
+            <p style="font-size:9px;letter-spacing:3px;color:#6b2737;text-transform:uppercase;margin:0 0 6px 0;">Ceremonia</p>
+            <p id="pdf-ceremonia-lugar" style="font-size:12px;font-weight:bold;margin:0 0 4px 0;">Iglesia La Dolorosa</p>
+            <p id="pdf-ceremonia-hora" style="font-size:11px;color:#666;margin:0;">04:30 pm</p>
+          </div>
+          <div style="flex:1;background:#fff;border:1px solid #e8dcc8;padding:12px;text-align:center;">
+            <p style="font-size:9px;letter-spacing:3px;color:#6b2737;text-transform:uppercase;margin:0 0 6px 0;">Recepcion</p>
+            <p id="pdf-recepcion-lugar" style="font-size:12px;font-weight:bold;margin:0 0 4px 0;">Hacienda Las Manolas</p>
+            <p id="pdf-recepcion-hora" style="font-size:11px;color:#666;margin:0;">07:00 pm</p>
+          </div>
         </div>
-
-        <div class="pdf-qr-section">
-          <div id="pdf-qrcode-box" class="pdf-qrcode-box"></div>
-          <a id="pdf-btn-link" href="#" target="_blank" class="pdf-action-btn">
-            ▶️ ESCUCHAR CANCIÓN Y ABRIR INVITACIÓN
-          </a>
+        <div style="background:#6b2737;color:#fff;padding:14px 20px;text-align:center;margin-bottom:20px;">
+          <p style="font-size:9px;letter-spacing:4px;text-transform:uppercase;margin:0 0 6px 0;opacity:0.8;">PASE EXCLUSIVO</p>
+          <h2 id="pdf-guest-name" style="font-size:22px;font-weight:bold;margin:0 0 6px 0;color:#d4a843;">Familia Mendoza</h2>
+          <p id="pdf-guest-pases" style="font-size:12px;margin:0;opacity:0.9;">2 pases reservados especialmente para ti</p>
         </div>
-
-        <div class="pdf-divider-double" style="margin-top: 25px;"></div>
-        <p class="pdf-footer-verse">
-          «Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos»<br>
-          <small>Cantar de los cantares 8:7</small>
-        </p>
+        <div style="display:flex;gap:20px;align-items:center;margin-bottom:20px;">
+          <div style="text-align:center;flex-shrink:0;">
+            <div id="pdf-qrcode-box" style="display:inline-block;padding:8px;border:1px solid #e8dcc8;background:#fff;"></div>
+            <p style="font-size:9px;color:#999;margin:4px 0 0 0;">Escanea para abrir</p>
+          </div>
+          <div style="flex:1;">
+            <p style="font-size:12px;color:#444;margin:0 0 12px 0;font-style:italic;">Toca el enlace para ver la invitacion completa con nuestra cancion</p>
+            <a id="pdf-btn-link" href="#" style="display:block;background:#6b2737;color:#fff;padding:12px;text-decoration:none;font-size:13px;letter-spacing:1px;font-family:Arial,sans-serif;font-weight:bold;text-align:center;">ABRIR INVITACION INTERACTIVA</a>
+            <p id="pdf-url-text" style="font-size:8px;color:#aaa;word-break:break-all;margin:6px 0 0 0;font-family:Arial,sans-serif;"></p>
+          </div>
+        </div>
+        <div style="border-top:1px solid #d4a843;padding-top:12px;text-align:center;">
+          <p style="font-size:11px;font-style:italic;color:#666;margin:0;">Las muchas aguas no podran apagar el amor, ni lo ahogaran los rios</p>
+          <p style="font-size:10px;color:#999;margin:4px 0 0 0;">Cantar de los Cantares 8:7</p>
+        </div>
       </div>
+      <div style="background:#d4a843;height:4px;width:100%;"></div>
+      <div style="background:#6b2737;height:10px;width:100%;"></div>
     </div>
   </div>
 
