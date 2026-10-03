@@ -15,7 +15,7 @@
   },
   "musica": {
     "titulo": "Nuestra Canción Romántica",
-    "audioUrl": "./assets/corazon_encantado.mp3"
+    "audioUrl": "./assets/corazon_encantado.mp3?v=2"
   },
   "historia": {
     "titulo": "Dos almas",
