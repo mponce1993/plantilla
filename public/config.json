@@ -15,7 +15,7 @@
   },
   "musica": {
     "titulo": "Nuestra Canción Romántica",
-    "audioUrl": "./assets/1.mp3"
+    "audioUrl": "./assets/cancion.mp3?v=3"
   },
   "historia": {
     "titulo": "Dos almas",

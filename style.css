@@ -286,6 +286,7 @@ body {
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
+  text-transform: none !important;
 }
 
 /* Nuestra Historia Grid */
