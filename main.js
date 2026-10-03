@@ -129,7 +129,7 @@ function renderData(config) {
 
   // Historia / Dos Almas
   if (config.historia) {
-    setTxt('txt-titulo-historia', config.historia.titulo || 'DOS ALMAS');
+    setTxt('txt-titulo-historia', config.historia.titulo || 'Dos almas');
     setHtml('txt-historia-1', (config.historia.parrafo1 || '').replace(/\n/g, '<br>'));
     setTxt('txt-historia-2', config.historia.parrafo2 || '');
   }
