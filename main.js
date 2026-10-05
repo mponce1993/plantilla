@@ -344,13 +344,14 @@ function setupEventListeners() {
     renderAsistentesTable();
 
     // Prepare WhatsApp Message
-    const waNum = appConfig?.whatsappRSVP || '5215500000000';
-    const textMsg = `¡Hola ${appConfig?.novia} y ${appConfig?.novio}! 👋\n\nSoy *${nombre}*.\n*Asistencia:* ${asistencia}\n*Pases Asignados Originales:* ${pasesAsignados}\n*Personas Confirmadas:* ${invitados}\n*Mensaje:* ${mensaje || '¡Nos vemos pronto!'}`;
+    const rawWaNum = appConfig?.whatsappRSVP || '59398429458';
+    const waNum = cleanWhatsAppNumber(rawWaNum);
+    const textMsg = `¡Hola ${appConfig?.novia || 'Fabiola'} y ${appConfig?.novio || 'Juan Pablo'}! 💍\n\n*Confirmación de Asistencia:*\n👤 *Nombre / Familia:* ${nombre}\n✅ *Estado:* ${asistencia}\n🎟️ *Pases Asignados:* ${pasesAsignados}\n👥 *Personas Confirmadas:* ${invitados}\n💬 *Mensaje:* ${mensaje || '¡Muchas felicidades en su gran día!'}`;
 
     const waUrl = `https://wa.me/${waNum}?text=${encodeURIComponent(textMsg)}`;
     window.open(waUrl, '_blank');
     modalRsvp.classList.add('hidden');
-    showToast('¡Asistencia registrada con éxito!');
+    showToast('¡Asistencia registrada localmente y enviando WhatsApp!');
   });
 
   // Editor Modal
@@ -747,4 +748,18 @@ function setAttr(id, attr, val) {
 function setHtml(id, val) {
   const el = document.getElementById(id);
   if (el) el.innerHTML = val;
+}
+function cleanWhatsAppNumber(number) {
+  let numStr = (number || '59398429458').toString().replace(/\D/g, '');
+  if (!numStr) return '59398429458';
+  if (numStr.length === 9 && numStr.startsWith('09')) {
+    return '593' + numStr.substring(1);
+  }
+  if (numStr.length === 9 && !numStr.startsWith('593')) {
+    return '593' + numStr;
+  }
+  if (numStr.length === 8) {
+    return '5939' + numStr;
+  }
+  return numStr;
 }
