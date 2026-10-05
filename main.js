@@ -610,7 +610,7 @@ function setupLinkGenerator() {
     const baseUrl = `${window.location.origin}${window.location.pathname}`;
     const fullUrl = `${baseUrl}?invitado=${encodeURIComponent(nombre)}&pases=${encodeURIComponent(pases)}`;
 
-    const novios = appConfig ? `${appConfig.novia} & ${appConfig.novio}` : 'Andrea & Bruno';
+    const novios = appConfig ? `${appConfig.novia} & ${appConfig.novio}` : 'Fabiola & Juan Pablo';
     const pasesText = pases == 1 ? '1 pase' : `${pases} pases`;
 
     const fullMessage = `¡Hola ${nombre}! 💌\n\nTenemos el gran honor de invitarte a nuestra boda. Hemos reservado especialmente ${pasesText} para ti.\n\nPuedes ver nuestra invitación oficial en el siguiente enlace:\n${fullUrl}\n\nCon todo nuestro cariño,\n${novios}`;
