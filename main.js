@@ -140,7 +140,10 @@ function renderData(config) {
     setTxt('txt-ceremonia-hora', config.ceremonia.hora || '');
     setTxt('txt-ceremonia-lugar', config.ceremonia.lugar || '');
     setTxt('txt-ceremonia-ciudad', config.ceremonia.ciudad || '');
-    setAttr('btn-ceremonia-mapa', 'href', config.ceremonia.mapaUrl || '#');
+    const cerMapa = (config.ceremonia.mapaUrl && config.ceremonia.mapaUrl.startsWith('http'))
+      ? config.ceremonia.mapaUrl
+      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((config.ceremonia.lugar || '') + ' ' + (config.ceremonia.ciudad || ''))}`;
+    setAttr('btn-ceremonia-mapa', 'href', cerMapa);
   }
 
   // Recepción
@@ -149,7 +152,10 @@ function renderData(config) {
     setTxt('txt-recepcion-hora', config.recepcion.hora || '');
     setTxt('txt-recepcion-lugar', config.recepcion.lugar || '');
     setTxt('txt-recepcion-ciudad', config.recepcion.ciudad || '');
-    setAttr('btn-recepcion-mapa', 'href', config.recepcion.mapaUrl || '#');
+    const recMapa = (config.recepcion.mapaUrl && config.recepcion.mapaUrl.startsWith('http'))
+      ? config.recepcion.mapaUrl
+      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((config.recepcion.lugar || '') + ' ' + (config.recepcion.ciudad || ''))}`;
+    setAttr('btn-recepcion-mapa', 'href', recMapa);
   }
 
   // Itinerario Timeline
@@ -273,23 +279,46 @@ function setupAudioPlayer() {
   const equalizer = document.getElementById('equalizer');
 
   if (appConfig?.musica?.audioUrl && audio) {
-    audio.src = appConfig.musica.audioUrl;
+    const cleanUrl = appConfig.musica.audioUrl.split('?')[0];
+    audio.src = cleanUrl;
   }
 
-  btnPlay?.addEventListener('click', () => {
+  function playAudio() {
+    if (!audio) return;
+    audio.play().then(() => {
+      iconPlay?.classList.add('hidden');
+      iconPause?.classList.remove('hidden');
+      equalizer?.classList.remove('hidden');
+    }).catch(err => console.log('Audio autoplay blocked by browser policy:', err));
+  }
+
+  function pauseAudio() {
+    if (!audio) return;
+    audio.pause();
+    iconPlay?.classList.remove('hidden');
+    iconPause?.classList.add('hidden');
+    equalizer?.classList.add('hidden');
+  }
+
+  btnPlay?.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (audio.paused) {
-      audio.play().then(() => {
-        iconPlay?.classList.add('hidden');
-        iconPause?.classList.remove('hidden');
-        equalizer?.classList.remove('hidden');
-      }).catch(err => console.log('Audio autoplay blocked by browser:', err));
+      playAudio();
     } else {
-      audio.pause();
-      iconPlay?.classList.remove('hidden');
-      iconPause?.classList.add('hidden');
-      equalizer?.classList.add('hidden');
+      pauseAudio();
     }
   });
+
+  // Automatically start romantic song on user's first touch/click anywhere on page
+  const startAudioOnFirstInteraction = () => {
+    if (audio && audio.paused) {
+      playAudio();
+    }
+    document.removeEventListener('click', startAudioOnFirstInteraction);
+    document.removeEventListener('touchstart', startAudioOnFirstInteraction);
+  };
+  document.addEventListener('click', startAudioOnFirstInteraction, { once: true });
+  document.addEventListener('touchstart', startAudioOnFirstInteraction, { once: true });
 }
 
 // Setup Event Listeners for Modals & RSVP Form
