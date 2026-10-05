@@ -644,7 +644,7 @@ async function generateGuestPDF(nombreGuest, pasesGuest) {
   const filename = `Invitacion_${nombre.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
 
   const novios = appConfig ? `${(appConfig.novia || 'FABIOLA').toUpperCase()} &amp; ${(appConfig.novio || 'JUAN PABLO').toUpperCase()}` : 'FABIOLA &amp; JUAN PABLO';
-  const fecha = (appConfig?.fechaCorazones || appConfig?.fechaTextoHeader || 'SABADO, 9 DE AGOSTO 2025').toUpperCase();
+  const fecha = (appConfig?.fechaCorazones || appConfig?.fechaTextoHeader || 'SÁBADO, 12 DE DICIEMBRE 2026').toUpperCase();
   const cerLugar = (appConfig?.ceremonia?.lugar || 'Iglesia La Dolorosa').replace(/"/g, '');
   const cerHora = appConfig?.ceremonia?.hora || '04:30 pm';
   const recLugar = (appConfig?.recepcion?.lugar || 'Hacienda Las Manolas').replace(/"/g, '');
