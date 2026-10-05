@@ -270,23 +270,28 @@ body {
 .section-title-wrap {
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
+  gap: 10px;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .title-line {
   flex: 1;
   height: 1px;
   background-color: var(--color-border);
+  min-width: 10px;
 }
 
 .section-title {
   font-family: var(--font-script);
-  font-size: 42px;
+  font-size: clamp(26px, 6.5vw, 42px);
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
   text-transform: none !important;
+  margin: 0 auto;
+  flex-shrink: 0;
 }
 
 /* Nuestra Historia Grid */
