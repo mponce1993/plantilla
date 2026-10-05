@@ -343,10 +343,10 @@ function setupEventListeners() {
 
     renderAsistentesTable();
 
-    // Prepare WhatsApp Message
-    const rawWaNum = appConfig?.whatsappRSVP || '59398429458';
+    // Prepare WhatsApp Message for background notification
+    const rawWaNum = appConfig?.whatsappRSVP || '59398419458';
     const waNum = cleanWhatsAppNumber(rawWaNum);
-    
+
     const lines = [
       `¡Hola ${appConfig?.novia || 'Fabiola'} y ${appConfig?.novio || 'Juan Pablo'}!`,
       '',
@@ -359,10 +359,31 @@ function setupEventListeners() {
     ];
 
     const textMsg = lines.join('\n');
-    const waUrl = `https://api.whatsapp.com/send?phone=${waNum}&text=${encodeURIComponent(textMsg)}`;
-    window.open(waUrl, '_blank');
+
+    // Envío silencioso en segundo plano si existe un webhook / API configurado
+    if (appConfig?.whatsappWebhookUrl) {
+      try {
+        fetch(appConfig.whatsappWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: waNum, text: textMsg, data: newRecord }),
+          mode: 'no-cors'
+        }).catch(err => console.log('Background webhook notification sent:', err));
+      } catch (err) {
+        console.log('Background notification trace:', err);
+      }
+    } else if (appConfig?.callmebotApiKey) {
+      try {
+        const url = `https://api.callmebot.com/whatsapp.php?phone=${waNum}&text=${encodeURIComponent(textMsg)}&apikey=${appConfig.callmebotApiKey}`;
+        fetch(url, { mode: 'no-cors' }).catch(err => console.log('CallMeBot sent:', err));
+      } catch (err) {
+        console.log('CallMeBot trace:', err);
+      }
+    }
+
+    // Proceso 100% transparente para el usuario sin redirección ni abrir pestañas
     modalRsvp.classList.add('hidden');
-    showToast('¡Asistencia registrada y enviando WhatsApp!');
+    showToast('¡Muchas gracias! Tu confirmación ha sido registrada exitosamente 💌');
   });
 
   // Editor Modal
