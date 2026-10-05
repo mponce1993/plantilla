@@ -173,9 +173,9 @@ function renderData(config) {
     setTxt('txt-dress-nota', config.dressCode.notaColor || '');
   }
 
-  // Sugerencia de Regalo
+  // Sugerencia de regalo
   if (config.regalos) {
-    setTxt('txt-regalos-titulo', config.regalos.titulo || 'Sugerencia de Regalo');
+    setTxt('txt-regalos-titulo', config.regalos.titulo || 'Sugerencia de regalo');
     setTxt('txt-regalos-mensaje', config.regalos.mensaje || '');
     renderBancos(config.regalos.cuentas || []);
   }
