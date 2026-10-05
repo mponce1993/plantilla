@@ -346,12 +346,23 @@ function setupEventListeners() {
     // Prepare WhatsApp Message
     const rawWaNum = appConfig?.whatsappRSVP || '59398429458';
     const waNum = cleanWhatsAppNumber(rawWaNum);
-    const textMsg = `¡Hola ${appConfig?.novia || 'Fabiola'} y ${appConfig?.novio || 'Juan Pablo'}! 💍\n\n*Confirmación de Asistencia:*\n👤 *Nombre / Familia:* ${nombre}\n✅ *Estado:* ${asistencia}\n🎟️ *Pases Asignados:* ${pasesAsignados}\n👥 *Personas Confirmadas:* ${invitados}\n💬 *Mensaje:* ${mensaje || '¡Muchas felicidades en su gran día!'}`;
+    
+    const lines = [
+      `¡Hola ${appConfig?.novia || 'Fabiola'} y ${appConfig?.novio || 'Juan Pablo'}!`,
+      '',
+      '*CONFIRMACIÓN DE ASISTENCIA*',
+      `• *Invitado / Familia:* ${nombre}`,
+      `• *Estado:* ${asistencia}`,
+      `• *Pases Asignados:* ${pasesAsignados}`,
+      `• *Personas Confirmadas:* ${invitados}`,
+      `• *Mensaje:* ${mensaje || '¡Nos vemos en la boda!'}`
+    ];
 
-    const waUrl = `https://wa.me/${waNum}?text=${encodeURIComponent(textMsg)}`;
+    const textMsg = lines.join('\n');
+    const waUrl = `https://api.whatsapp.com/send?phone=${waNum}&text=${encodeURIComponent(textMsg)}`;
     window.open(waUrl, '_blank');
     modalRsvp.classList.add('hidden');
-    showToast('¡Asistencia registrada localmente y enviando WhatsApp!');
+    showToast('¡Asistencia registrada y enviando WhatsApp!');
   });
 
   // Editor Modal
