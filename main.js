@@ -341,27 +341,28 @@ function setupEventListeners() {
     }
   });
 
-  // Submit RSVP Form (Saves in Local Storage & Google Sheets)
+  // Submit RSVP Form (Saves directly to Google Sheets)
   document.getElementById('form-rsvp')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btnSubmit = e.target.querySelector('button[type="submit"]');
     const originalBtnText = btnSubmit ? btnSubmit.innerHTML : 'Guardar Confirmación 💌';
     if (btnSubmit) {
       btnSubmit.disabled = true;
-      btnSubmit.innerHTML = '⏳ Guardando confirmación...';
+      btnSubmit.innerHTML = '⏳ Guardando en Google Sheets...';
     }
 
-    const nombre = document.getElementById('rsvp-nombre').value;
-    const asistencia = document.getElementById('rsvp-asistencia').value;
-    let invitados = parseInt(document.getElementById('rsvp-invitados').value, 10);
-    const mensaje = document.getElementById('rsvp-mensaje').value;
+    const nombre = document.getElementById('rsvp-nombre')?.value?.trim() || 'Invitado';
+    const asistencia = document.getElementById('rsvp-asistencia')?.value || 'Confirmado';
+    let invitados = parseInt(document.getElementById('rsvp-invitados')?.value || '1', 10);
+    const mensaje = document.getElementById('rsvp-mensaje')?.value?.trim() || '';
 
     const pasesAsignados = parseInt(window.currentPasesAsignados || invitados, 10);
 
     // Enforce max pases on submit
     if (invitados > pasesAsignados) {
       invitados = pasesAsignados;
-      document.getElementById('rsvp-invitados').value = pasesAsignados;
+      const elInvitados = document.getElementById('rsvp-invitados');
+      if (elInvitados) elInvitados.value = pasesAsignados;
       showToast(`⚠️ Se ajustó a ${pasesAsignados} pase${pasesAsignados > 1 ? 's' : ''} reservado${pasesAsignados > 1 ? 's' : ''}.`);
     }
     const fechaHora = new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' });
@@ -376,25 +377,33 @@ function setupEventListeners() {
       mensaje
     };
 
-    // Save to local storage list
-    const existingList = JSON.parse(localStorage.getItem('boda_lista_confirmados') || '[]');
-    existingList.push(newRecord);
-    localStorage.setItem('boda_lista_confirmados', JSON.stringify(existingList));
-
-    // Envío a Google Sheets en tiempo real (si está configurado)
-    if (appConfig?.googleSheetUrl && appConfig.googleSheetUrl.trim() !== '') {
+    // Envío a Google Sheets en tiempo real con URLSearchParams (100% compatible con CORS y móviles)
+    const targetUrl = (appConfig?.googleSheetUrl || '').trim();
+    if (targetUrl) {
       try {
-        await fetch(appConfig.googleSheetUrl.trim(), {
+        const formData = new URLSearchParams();
+        formData.append('fecha', fechaHora);
+        formData.append('nombre', nombre);
+        formData.append('asistencia', asistencia);
+        formData.append('pases', invitados);
+        formData.append('pasesAsignados', pasesAsignados);
+        formData.append('mensaje', mensaje);
+
+        await fetch(targetUrl, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(newRecord)
+          body: formData
         });
         console.log('✅ Confirmación enviada a Google Sheets exitosamente');
       } catch (err) {
         console.error('Error enviando a Google Sheets:', err);
       }
     }
+
+    // Actualizar copia local
+    const existingList = JSON.parse(localStorage.getItem('boda_lista_confirmados') || '[]');
+    existingList.push(newRecord);
+    localStorage.setItem('boda_lista_confirmados', JSON.stringify(existingList));
 
     renderAsistentesTable();
 
@@ -442,7 +451,12 @@ function setupEventListeners() {
     }
 
     modalRsvp.classList.add('hidden');
-    showToast('¡Muchas gracias! Tu confirmación ha sido registrada exitosamente 💌');
+    showToast('¡Muchas gracias! Tu confirmación ha sido guardada en Google Sheets 💌');
+
+    // Consultar Google Sheets fresco
+    if (targetUrl) {
+      setTimeout(() => syncGoogleSheetsData(false), 1200);
+    }
   });
 
   // Editor Modal
@@ -450,6 +464,9 @@ function setupEventListeners() {
   document.getElementById('btn-open-editor')?.addEventListener('click', () => {
     populateEditorFields();
     modalEditor.classList.remove('hidden');
+    if (appConfig?.googleSheetUrl) {
+      syncGoogleSheetsData(false);
+    }
   });
   document.getElementById('btn-close-editor')?.addEventListener('click', () => modalEditor.classList.add('hidden'));
 
@@ -560,6 +577,10 @@ function setupTabs() {
       tab.classList.add('active');
       const targetPane = document.getElementById(tab.dataset.tab);
       if (targetPane) targetPane.classList.add('active');
+
+      if (tab.dataset.tab === 'tab-asistentes' && appConfig?.googleSheetUrl) {
+        syncGoogleSheetsData(false);
+      }
     });
   });
 }
@@ -578,7 +599,8 @@ function downloadJsonFile(content, fileName) {
 
 // Sync data with Google Sheets
 async function syncGoogleSheetsData(showFeedback = false) {
-  if (!appConfig?.googleSheetUrl || appConfig.googleSheetUrl.trim() === '') {
+  const targetUrl = (appConfig?.googleSheetUrl || '').trim();
+  if (!targetUrl) {
     if (showFeedback) showToast('⚠️ Configura primero la URL de Google Sheets en el Editor.');
     return;
   }
@@ -586,28 +608,35 @@ async function syncGoogleSheetsData(showFeedback = false) {
   const btnSync = document.getElementById('btn-sync-sheets');
   if (btnSync) {
     btnSync.disabled = true;
-    btnSync.innerText = '🔄 Sincronizando...';
+    btnSync.innerText = '🔄 Actualizando...';
+  }
+
+  const tbody = document.getElementById('asistentes-tbody');
+  if (tbody && showFeedback) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:18px; color:#6b2737;">⏳ Consultando confirmaciones de Google Sheets en vivo...</td></tr>';
   }
 
   try {
-    const res = await fetch(appConfig.googleSheetUrl.trim());
+    const timestamp = new Date().getTime();
+    const res = await fetch(`${targetUrl}?t=${timestamp}`);
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data)) {
         localStorage.setItem('boda_lista_confirmados', JSON.stringify(data));
         renderAsistentesTable();
-        if (showFeedback) showToast(`✅ ¡Sincronizado! ${data.length} confirmaciones desde Google Sheets.`);
+        if (showFeedback) showToast(`✅ ¡Listo! ${data.length} confirmaciones desde Google Sheets.`);
       }
     } else {
       if (showFeedback) showToast('No se pudo obtener datos de Google Sheets.');
     }
   } catch (err) {
     console.warn('Google Sheets sync notice:', err);
-    if (showFeedback) showToast('💡 Revisa tu hoja de Google Sheets para ver todos los registros.');
+    if (showFeedback) showToast('💡 Mostrando confirmaciones guardadas');
+    renderAsistentesTable();
   } finally {
     if (btnSync) {
       btnSync.disabled = false;
-      btnSync.innerText = '🔄 Actualizar Google Sheets';
+      btnSync.innerText = '🔄 Actualizar Lista';
     }
   }
 }
