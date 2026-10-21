@@ -443,6 +443,7 @@
           </div>
 
           <div class="editor-actions">
+            <button id="btn-sync-sheets" class="btn-editor-action preview">🔄 Actualizar Google Sheets</button>
             <button id="btn-export-csv" class="btn-editor-action preview">📊 Descargar Excel / CSV</button>
             <button id="btn-export-json" class="btn-editor-action download">📥 Descargar JSON</button>
             <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️
@@ -485,6 +486,12 @@
           <div class="form-group">
             <label>WhatsApp (con código de país, ej. 5215500000000):</label>
             <input type="text" id="edit-whatsapp" />
+          </div>
+          <div class="form-group">
+            <label>URL de Google Sheets (Apps Script Web App):</label>
+            <input type="url" id="edit-googleSheetUrl" placeholder="https://script.google.com/macros/s/.../exec" />
+            <small style="color:#666; font-size:11px; display:block; margin-top:4px;">Enlace de la aplicación web de
+              Google Apps Script para guardar todas las confirmaciones en tiempo real.</small>
           </div>
           <div class="form-group">
             <label>URL Canción MP3:</label>

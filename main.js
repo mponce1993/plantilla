@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupLinkGenerator();
   setupTabs();
   renderAsistentesTable();
+  if (appConfig?.googleSheetUrl) {
+    syncGoogleSheetsData(false);
+  }
 });
 
 // Setup Secret Admin Mode Access
@@ -338,9 +341,16 @@ function setupEventListeners() {
     }
   });
 
-  // Submit RSVP Form (Saves in Local Storage & Opens WhatsApp)
-  document.getElementById('form-rsvp')?.addEventListener('submit', (e) => {
+  // Submit RSVP Form (Saves in Local Storage & Google Sheets)
+  document.getElementById('form-rsvp')?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const btnSubmit = e.target.querySelector('button[type="submit"]');
+    const originalBtnText = btnSubmit ? btnSubmit.innerHTML : 'Guardar Confirmación 💌';
+    if (btnSubmit) {
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = '⏳ Guardando confirmación...';
+    }
+
     const nombre = document.getElementById('rsvp-nombre').value;
     const asistencia = document.getElementById('rsvp-asistencia').value;
     let invitados = parseInt(document.getElementById('rsvp-invitados').value, 10);
@@ -356,7 +366,7 @@ function setupEventListeners() {
     }
     const fechaHora = new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' });
 
-    // Save to local storage list
+    // Record object
     const newRecord = {
       fecha: fechaHora,
       nombre,
@@ -366,9 +376,25 @@ function setupEventListeners() {
       mensaje
     };
 
+    // Save to local storage list
     const existingList = JSON.parse(localStorage.getItem('boda_lista_confirmados') || '[]');
     existingList.push(newRecord);
     localStorage.setItem('boda_lista_confirmados', JSON.stringify(existingList));
+
+    // Envío a Google Sheets en tiempo real (si está configurado)
+    if (appConfig?.googleSheetUrl && appConfig.googleSheetUrl.trim() !== '') {
+      try {
+        await fetch(appConfig.googleSheetUrl.trim(), {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(newRecord)
+        });
+        console.log('✅ Confirmación enviada a Google Sheets exitosamente');
+      } catch (err) {
+        console.error('Error enviando a Google Sheets:', err);
+      }
+    }
 
     renderAsistentesTable();
 
@@ -410,7 +436,11 @@ function setupEventListeners() {
       }
     }
 
-    // Proceso 100% transparente para el usuario sin redirección ni abrir pestañas
+    if (btnSubmit) {
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = originalBtnText;
+    }
+
     modalRsvp.classList.add('hidden');
     showToast('¡Muchas gracias! Tu confirmación ha sido registrada exitosamente 💌');
   });
@@ -459,6 +489,7 @@ function populateEditorFields() {
   setVal('edit-fechaTextoHeader', appConfig.fechaTextoHeader);
   setVal('edit-fechaISO', appConfig.fechaISO ? appConfig.fechaISO.substring(0, 16) : '');
   setVal('edit-whatsapp', appConfig.whatsappRSVP);
+  setVal('edit-googleSheetUrl', appConfig.googleSheetUrl);
   setVal('edit-audioUrl', appConfig.musica?.audioUrl);
 
   setVal('edit-historia-1', appConfig.historia?.parrafo1);
@@ -493,6 +524,7 @@ function saveEditorToConfig() {
   appConfig.fechaCorazones = getVal('edit-fechaTextoHeader')?.toUpperCase() || appConfig.fechaCorazones;
   appConfig.fechaISO = getVal('edit-fechaISO') ? `${getVal('edit-fechaISO')}:00` : appConfig.fechaISO;
   appConfig.whatsappRSVP = getVal('edit-whatsapp') || appConfig.whatsappRSVP;
+  appConfig.googleSheetUrl = getVal('edit-googleSheetUrl') || '';
 
   if (appConfig.musica) appConfig.musica.audioUrl = getVal('edit-audioUrl') || appConfig.musica.audioUrl;
   if (appConfig.historia) {
@@ -540,6 +572,42 @@ function downloadJsonFile(content, fileName) {
   link.download = fileName;
   link.click();
   URL.revokeObjectURL(url);
+}
+
+// Sync data with Google Sheets
+async function syncGoogleSheetsData(showFeedback = false) {
+  if (!appConfig?.googleSheetUrl || appConfig.googleSheetUrl.trim() === '') {
+    if (showFeedback) showToast('⚠️ Configura primero la URL de Google Sheets en el Editor.');
+    return;
+  }
+
+  const btnSync = document.getElementById('btn-sync-sheets');
+  if (btnSync) {
+    btnSync.disabled = true;
+    btnSync.innerText = '🔄 Sincronizando...';
+  }
+
+  try {
+    const res = await fetch(appConfig.googleSheetUrl.trim());
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        localStorage.setItem('boda_lista_confirmados', JSON.stringify(data));
+        renderAsistentesTable();
+        if (showFeedback) showToast(`✅ ¡Sincronizado! ${data.length} confirmaciones desde Google Sheets.`);
+      }
+    } else {
+      if (showFeedback) showToast('No se pudo obtener datos de Google Sheets.');
+    }
+  } catch (err) {
+    console.warn('Google Sheets sync notice:', err);
+    if (showFeedback) showToast('💡 Revisa tu hoja de Google Sheets para ver todos los registros.');
+  } finally {
+    if (btnSync) {
+      btnSync.disabled = false;
+      btnSync.innerText = '🔄 Actualizar Google Sheets';
+    }
+  }
 }
 
 // Render Attendees Table & Stats
@@ -615,6 +683,7 @@ function exportAsistentesJSON() {
 }
 
 // Setup Event Listeners for Export & Clear Actions
+document.getElementById('btn-sync-sheets')?.addEventListener('click', () => syncGoogleSheetsData(true));
 document.getElementById('btn-export-csv')?.addEventListener('click', exportAsistentesCSV);
 document.getElementById('btn-export-json')?.addEventListener('click', exportAsistentesJSON);
 document.getElementById('btn-clear-asistentes')?.addEventListener('click', () => {
