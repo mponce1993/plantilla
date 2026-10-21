@@ -490,6 +490,7 @@ function populateEditorFields() {
   setVal('edit-fechaISO', appConfig.fechaISO ? appConfig.fechaISO.substring(0, 16) : '');
   setVal('edit-whatsapp', appConfig.whatsappRSVP);
   setVal('edit-googleSheetUrl', appConfig.googleSheetUrl);
+  setVal('edit-googleSheetWebUrl', appConfig.googleSheetWebUrl);
   setVal('edit-audioUrl', appConfig.musica?.audioUrl);
 
   setVal('edit-historia-1', appConfig.historia?.parrafo1);
@@ -525,6 +526,7 @@ function saveEditorToConfig() {
   appConfig.fechaISO = getVal('edit-fechaISO') ? `${getVal('edit-fechaISO')}:00` : appConfig.fechaISO;
   appConfig.whatsappRSVP = getVal('edit-whatsapp') || appConfig.whatsappRSVP;
   appConfig.googleSheetUrl = getVal('edit-googleSheetUrl') || '';
+  appConfig.googleSheetWebUrl = getVal('edit-googleSheetWebUrl') || '';
 
   if (appConfig.musica) appConfig.musica.audioUrl = getVal('edit-audioUrl') || appConfig.musica.audioUrl;
   if (appConfig.historia) {
@@ -683,6 +685,22 @@ function exportAsistentesJSON() {
 }
 
 // Setup Event Listeners for Export & Clear Actions
+document.getElementById('btn-open-excel')?.addEventListener('click', () => {
+  const directUrl = appConfig?.googleSheetWebUrl || localStorage.getItem('boda_sheet_direct_url');
+  if (directUrl && directUrl.trim() !== '') {
+    window.open(directUrl.trim(), '_blank');
+  } else {
+    const inputUrl = prompt('Pega aquí el enlace de tu hoja de Google Sheets (la URL que ves en tu navegador al abrir la hoja de cálculo):');
+    if (inputUrl && inputUrl.trim() !== '') {
+      const clean = inputUrl.trim();
+      localStorage.setItem('boda_sheet_direct_url', clean);
+      if (appConfig) appConfig.googleSheetWebUrl = clean;
+      window.open(clean, '_blank');
+    } else {
+      window.open('https://docs.google.com/spreadsheets/', '_blank');
+    }
+  }
+});
 document.getElementById('btn-sync-sheets')?.addEventListener('click', () => syncGoogleSheetsData(true));
 document.getElementById('btn-export-csv')?.addEventListener('click', exportAsistentesCSV);
 document.getElementById('btn-export-json')?.addEventListener('click', exportAsistentesJSON);

@@ -443,8 +443,10 @@
           </div>
 
           <div class="editor-actions">
-            <button id="btn-sync-sheets" class="btn-editor-action preview">🔄 Actualizar Google Sheets</button>
-            <button id="btn-export-csv" class="btn-editor-action preview">📊 Descargar Excel / CSV</button>
+            <button id="btn-open-excel" class="btn-editor-action" style="background:#107c41; color:#fff;"
+              title="Abrir Google Sheets en vivo">📊 Visualizar Excel</button>
+            <button id="btn-sync-sheets" class="btn-editor-action preview">🔄 Actualizar Lista</button>
+            <button id="btn-export-csv" class="btn-editor-action preview">📥 Descargar CSV</button>
             <button id="btn-export-json" class="btn-editor-action download">📥 Descargar JSON</button>
             <button id="btn-clear-asistentes" class="btn-editor-action" style="background:#dc3545; color:#fff;">🗑️
               Limpiar Lista</button>
@@ -492,6 +494,13 @@
             <input type="url" id="edit-googleSheetUrl" placeholder="https://script.google.com/macros/s/.../exec" />
             <small style="color:#666; font-size:11px; display:block; margin-top:4px;">Enlace de la aplicación web de
               Google Apps Script para guardar todas las confirmaciones en tiempo real.</small>
+          </div>
+          <div class="form-group">
+            <label>Enlace directo a tu hoja de Excel (Google Sheets):</label>
+            <input type="url" id="edit-googleSheetWebUrl"
+              placeholder="https://docs.google.com/spreadsheets/d/.../edit" />
+            <small style="color:#666; font-size:11px; display:block; margin-top:4px;">Enlace que se abrirá al pulsar el
+              botón "Visualizar Excel".</small>
           </div>
           <div class="form-group">
             <label>URL Canción MP3:</label>

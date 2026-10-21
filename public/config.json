@@ -7,7 +7,8 @@
   "fechaTextoHeader": "Sábado, 12 Diciembre 2026",
   "fechaCorazones": "SÁBADO, 12 DICIEMBRE 2026",
   "fechaISO": "2026-12-12T19:00:00",
-  "lugarResumen": "",
+  "googleSheetUrl": "https://script.google.com/macros/s/AKfycbzNV2_GL5DE34g6I3ZHoQOMvckSH2_383qrxL5obyP6nNTMVTPbu7XKef_nIeco3I7z/exec",
+  "googleSheetWebUrl": "",
   "pases": {
     "etiquetaDefault": "Pase de Invitación",
     "mensajeReservado": "Hemos reservado {{pases}} pases especialmente para ti.",
